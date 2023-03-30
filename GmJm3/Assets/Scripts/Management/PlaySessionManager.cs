@@ -24,7 +24,7 @@ public class PlaySessionManager : MonoBehaviour
 
     void OnSceneLoad(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name == "Tutorial")
+        if (scene.name == "Level1Part1")
         {
             //load tutorial
             LevelManager.StartLevel();
