@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 493996814}
   - component: {fileID: 493996813}
   m_Layer: 0
-  m_Name: Grid
+  m_Name: LevelDesign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
