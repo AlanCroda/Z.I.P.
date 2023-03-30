@@ -109,7 +109,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 3
+  m_GravityScale: 4.5
   m_Material: {fileID: 6200000, guid: 30c5ae8eb06247b44867c0a75baad666, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 0
@@ -133,17 +133,20 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
-  walkSpeed: 10
+  walkSpeed: 11
   acceleration: 3
   decceleration: 5
   frictionAmount: 2
-  jumpForce: 15
+  jumpForce: 18
   fallMultiplier: 1.5
   maxFallSpeed: -30
   jumpHangTimeThreshold: 1
   jumpHangAccelerationMultiplier: 1.1
   jumpHangMaxSpeedMultiplier: 1.3
-  BoxSize: {x: 0.9, y: 0.05, z: 0}
+  wallJumpForce: {x: 5, y: 7}
+  bottomBoxSize: {x: 0.9, y: 0.02, z: 0}
+  leftBoxSize: {x: 0.02, y: 2, z: 0}
+  rightBoxSize: {x: 0.02, y: 2, z: 0}
   maxDistance: 1
 --- !u!114 &5486973127599547372
 MonoBehaviour:

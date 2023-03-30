@@ -66,8 +66,29 @@ public class PlayerMovement : MonoBehaviour
             //can jump
             rb.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);
         }
+        if(player.collisionScript.touchingWall() != 0)
+        {
+            wallJump(player.collisionScript.touchingWall());
+        }
     }
 
+    internal void wallJump(int wallJumpDirection)
+    {
+        Vector2 force = new Vector2(player.wallJumpForce.x, player.wallJumpForce.y);
+        force.x *= wallJumpDirection;
+
+        if (Mathf.Sign(rb.velocity.x) != Mathf.Sign(force.x))
+        {
+            force.x -= rb.velocity.x;
+        }
+
+        if (rb.velocity.y < 0)
+        {
+            force.y -= rb.velocity.y;
+        }
+
+        rb.AddForce(force, ForceMode2D.Impulse);
+    }
 
     private void FixedUpdate()
     {

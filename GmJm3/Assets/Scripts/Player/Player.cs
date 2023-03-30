@@ -40,10 +40,16 @@ public class Player : MonoBehaviour
     internal float jumpHangAccelerationMultiplier;
     [SerializeField]
     internal float jumpHangMaxSpeedMultiplier;
+    [SerializeField]
+    internal Vector2 wallJumpForce;
 
     [Header("GroundCheck")]
     [SerializeField]
-    internal Vector3 BoxSize;
+    internal Vector3 bottomBoxSize;
+    [SerializeField]
+    internal Vector3 leftBoxSize;
+    [SerializeField]
+    internal Vector3 rightBoxSize;
     [SerializeField]
     internal float maxDistance;
 }
