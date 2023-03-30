@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5486973127599547368}
   - component: {fileID: 5486973127599547371}
-  - component: {fileID: 5486973127599547369}
   - component: {fileID: 5486973127599547374}
   - component: {fileID: 5486973127599547375}
   - component: {fileID: 5486973127599547372}
@@ -20,6 +19,7 @@ GameObject:
   - component: {fileID: 5486973127599547361}
   - component: {fileID: 5486973127599547360}
   - component: {fileID: 5486973127599547363}
+  - component: {fileID: 4616408950334352948}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -94,22 +94,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &5486973127599547369
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5486973127599547381}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
-  m_Direction: 0
 --- !u!50 &5486973127599547374
 Rigidbody2D:
   serializedVersion: 4
@@ -150,10 +134,10 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
-  jumpForce: 5
+  jumpForce: 8
   fallMultiplier: 0
   walkSpeed: 7
-  BoxSize: {x: 0.9, y: 0.1, z: 0}
+  BoxSize: {x: 0.9, y: 0.02, z: 0}
   maxDistance: 1
 --- !u!114 &5486973127599547372
 MonoBehaviour:
@@ -242,3 +226,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae0878d2537d3a4ba8ee5c23f35be98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!61 &4616408950334352948
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486973127599547381}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 2}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2}
+  m_EdgeRadius: 0
