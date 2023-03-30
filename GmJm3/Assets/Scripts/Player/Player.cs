@@ -28,4 +28,8 @@ public class Player : MonoBehaviour
     internal float fallMultiplier;
     [SerializeField]
     internal float walkSpeed = 0;
+    [SerializeField]
+    internal Vector3 BoxSize;
+    [SerializeField]
+    internal float maxDistance;
 }

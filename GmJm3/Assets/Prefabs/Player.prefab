@@ -150,9 +150,11 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 64
-  jumpForce: 1
+  jumpForce: 5
   fallMultiplier: 0
   walkSpeed: 7
+  BoxSize: {x: 0.9, y: 0.1, z: 0}
+  maxDistance: 1
 --- !u!114 &5486973127599547372
 MonoBehaviour:
   m_ObjectHideFlags: 0
