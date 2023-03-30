@@ -109,7 +109,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 6200000, guid: 30c5ae8eb06247b44867c0a75baad666, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 0
@@ -130,13 +130,19 @@ MonoBehaviour:
   playerInput: {fileID: 5486973127599547362}
   playerMovement: {fileID: 5486973127599547372}
   collisionScript: {fileID: 5486973127599547373}
-  health: 0
   ground:
     serializedVersion: 2
     m_Bits: 64
-  jumpForce: 8
-  fallMultiplier: 0
-  walkSpeed: 7
+  walkSpeed: 10
+  acceleration: 3
+  decceleration: 5
+  frictionAmount: 2
+  jumpForce: 15
+  fallMultiplier: 1.5
+  maxFallSpeed: -30
+  jumpHangTimeThreshold: 1
+  jumpHangAccelerationMultiplier: 1.1
+  jumpHangMaxSpeedMultiplier: 1.3
   BoxSize: {x: 0.9, y: 0.05, z: 0}
   maxDistance: 1
 --- !u!114 &5486973127599547372

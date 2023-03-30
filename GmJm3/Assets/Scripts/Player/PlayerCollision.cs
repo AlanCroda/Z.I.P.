@@ -20,12 +20,6 @@ public class PlayerCollision : MonoBehaviour
 
     internal bool isGrounded()
     {
-        /*var center_capsule = capsuleCollider.bounds.center;
-        RaycastHit2D hit = Physics2D.Raycast(center_capsule, Vector2.down, 1.5f, player.ground);
-        if (hit.collider != null)
-        {
-            return true;
-        }*/
         if(Physics2D.BoxCast(transform.position,player.BoxSize,0,-transform.up,player.maxDistance,player.ground))
         {
             return true;
@@ -34,6 +28,5 @@ public class PlayerCollision : MonoBehaviour
         {
             return false;
         }
-
     }
 }
