@@ -12,13 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685450c0f80dfa24e8564b672047def3, type: 3}
   m_Name: Tutorial
   m_EditorClassIdentifier: 
-  playerPos: {x: -9, y: -4, z: 0}
-  goalPos: {x: 9, y: -4, z: 0}
+  playerPos: {x: -8, y: -3, z: 0}
+  goalPos: {x: 8, y: -3, z: 0}
   enemyPos:
-  - {x: 5, y: -4, z: 0}
-  - {x: 6, y: -4, z: 0}
-  - {x: 7, y: -4, z: 0}
-  harmfulPos:
-  - {x: -7, y: -4, z: 0}
-  - {x: -6, y: -4, z: 0}
-  - {x: -5, y: -4, z: 0}
+  - {x: 0, y: -3, z: 0}

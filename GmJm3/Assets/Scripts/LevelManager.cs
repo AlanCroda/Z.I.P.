@@ -56,13 +56,6 @@ public class LevelManager : MonoBehaviour
             newEnemy.position = levelData.enemyPos[i];
             newEnemy.parent = enemyFolder;
         }
-        //checking amount of harmful and placing in positions given
-        for (int i = 0; i < levelData.harmfulPos.Length; i++)
-        {
-            Transform newHarmful = Instantiate(spikePrefab) as Transform;
-            newHarmful.position = levelData.harmfulPos[i];
-            newHarmful.parent = harmfulFolder;
-        }
     }
 
     void clearlevel()
