@@ -137,13 +137,16 @@ MonoBehaviour:
   acceleration: 3
   decceleration: 5
   frictionAmount: 2
+  facingRight: 0
   jumpForce: 18
   fallMultiplier: 1.5
   maxFallSpeed: -30
   jumpHangTimeThreshold: 1
   jumpHangAccelerationMultiplier: 1.1
   jumpHangMaxSpeedMultiplier: 1.3
-  wallJumpForce: {x: 5, y: 7}
+  wallJumpForce: {x: 5, y: 5}
+  jumpsLeft: 0
+  wallSlideSpeed: 2
   bottomBoxSize: {x: 0.9, y: 0.02, z: 0}
   leftBoxSize: {x: 0.02, y: 2, z: 0}
   rightBoxSize: {x: 0.02, y: 2, z: 0}

@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
     internal float decceleration;
     [SerializeField]
     internal float frictionAmount;
+    [SerializeField]
+    internal bool facingRight;
 
     [Header("Jumping")]
     [SerializeField]
@@ -42,6 +44,11 @@ public class Player : MonoBehaviour
     internal float jumpHangMaxSpeedMultiplier;
     [SerializeField]
     internal Vector2 wallJumpForce;
+    [SerializeField]
+    internal int jumpsLeft;
+    internal int amountOfJumps;
+    [SerializeField]
+    internal int wallSlideSpeed;
 
     [Header("GroundCheck")]
     [SerializeField]

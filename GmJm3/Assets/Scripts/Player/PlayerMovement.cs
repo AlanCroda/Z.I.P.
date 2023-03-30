@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 _moveInput;
     bool _jumpPressed;
+    bool isWallSliding = false;
+    int facingDirection = 1;
     
 
     private void Start()
@@ -40,6 +42,28 @@ public class PlayerMovement : MonoBehaviour
             amount *= Mathf.Sign(rb.velocity.x);
             rb.AddForce(Vector2.right * -amount, ForceMode2D.Force);
         }
+
+
+        if(player.facingRight && _moveInput.x < 0)
+        {
+            Flip();
+        }
+        else if(!player.facingRight && _moveInput.x > 0) 
+        { 
+            Flip(); 
+        }
+
+    }
+
+    void WallSliding()
+    {
+        if(isWallSliding)
+        {
+            if(rb.velocity.y < -player.wallSlideSpeed)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, -player.wallSlideSpeed);
+            }
+        }
     }
 
     void jumpSetup()
@@ -66,12 +90,26 @@ public class PlayerMovement : MonoBehaviour
             //can jump
             rb.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);
         }
-        if(player.collisionScript.touchingWall() != 0)
+        else if(isWallSliding && !player.collisionScript.isGrounded()) 
         {
-            wallJump(player.collisionScript.touchingWall());
+            Vector2 force = new Vector2(player.wallJumpForce.x, player.wallJumpForce.y);
+            force.x *= facingDirection;
+
+            if (Mathf.Sign(rb.velocity.x) != Mathf.Sign(force.x))
+            {
+                force.x -= rb.velocity.x;
+            }
+
+            if (rb.velocity.y < 0)
+            {
+                force.y -= rb.velocity.y;
+            }
+
+            rb.AddForce(force, ForceMode2D.Impulse);
         }
     }
 
+    /*
     internal void wallJump(int wallJumpDirection)
     {
         Vector2 force = new Vector2(player.wallJumpForce.x, player.wallJumpForce.y);
@@ -88,7 +126,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         rb.AddForce(force, ForceMode2D.Impulse);
-    }
+    }*/
 
     private void FixedUpdate()
     {
@@ -100,7 +138,19 @@ public class PlayerMovement : MonoBehaviour
     {
         _jumpPressed = (player.playerInput._jumpPressed > 0);
         _moveInput = player.playerInput._moveInput;
+        isWallSliding = player.collisionScript.touchingWall();
+        WallSliding();
     }
 
+
+    private void Flip()
+    {
+        if(!isWallSliding)
+        {
+            facingDirection *= -1;
+            player.facingRight = !player.facingRight;
+            transform.Rotate(0, 180, 0);
+        }
+    }
 
 }

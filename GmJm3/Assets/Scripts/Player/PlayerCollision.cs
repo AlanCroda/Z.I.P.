@@ -5,23 +5,13 @@ public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] Player player;
 
-    internal CapsuleCollider2D capsuleCollider;
-
-    private void Awake()
-    {
-        capsuleCollider = GetComponent<CapsuleCollider2D>();
-    }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawCube(transform.position-transform.up*player.maxDistance,player.bottomBoxSize);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position - transform.right/2 * player.maxDistance, player.leftBoxSize);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position + transform.right/2 * player.maxDistance, player.rightBoxSize);
+        Gizmos.DrawCube(transform.position - transform.right/2 * player.maxDistance, player.rightBoxSize);
     }
 
     internal bool isGrounded()
@@ -36,19 +26,15 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    internal int touchingWall()
+    internal bool touchingWall()
     {
-        if (Physics2D.BoxCast(transform.position, player.leftBoxSize, 0, -transform.right/2, player.maxDistance, player.ground))
+        if (Physics2D.BoxCast(transform.position, player.rightBoxSize, 0, -transform.right/2, player.maxDistance, player.ground))
         {
-            return 1;
-        }
-        if (Physics2D.BoxCast(transform.position, player.rightBoxSize, 0, transform.right/2, player.maxDistance, player.ground))
-        {
-            return -1;
+            return true;
         }
         else
         {
-            return 0;
+            return false;
         }
     }
 }
