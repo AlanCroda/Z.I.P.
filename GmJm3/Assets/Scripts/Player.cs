@@ -25,5 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField]
     internal float jumpForce;
     [SerializeField]
+    internal float fallMultiplier;
+    [SerializeField]
     internal float walkSpeed = 0;
 }

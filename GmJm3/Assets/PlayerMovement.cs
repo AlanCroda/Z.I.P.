@@ -27,7 +27,7 @@ public class PlayerMovement : MonoBehaviour
         }
         //var height
         if(!_jumpPressed && rb.velocity.y > 0) {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.2f * Time.deltaTime);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * player.fallMultiplier * Time.deltaTime);
         }
     }
 
