@@ -4,6 +4,6 @@ public class MainMenuUI : MonoBehaviour
 {
     public void OnPlayPressed()
     {
-        SceneLoader.LoadScene(SceneName.Tutorial);
+        SceneLoader.LoadScene(SceneName.Level1);
     }
 }

@@ -11,5 +11,5 @@ public static class SceneLoader
 public enum SceneName
 {
     MainMenu,
-    Tutorial
+    Level1
 }
