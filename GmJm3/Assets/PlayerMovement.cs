@@ -1,4 +1,3 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Player))]
@@ -26,8 +25,9 @@ public class PlayerMovement : MonoBehaviour
         {
             jump();
         }
+        //var height
         if(!_jumpPressed && rb.velocity.y > 0) {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f * Time.deltaTime);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.2f * Time.deltaTime);
         }
     }
 

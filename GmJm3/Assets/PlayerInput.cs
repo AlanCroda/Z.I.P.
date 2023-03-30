@@ -9,11 +9,8 @@ public class PlayerInput : MonoBehaviour
     internal Vector2 _moveInput;
     internal float _jumpPressed;
 
-    Rigidbody2D rb;
-
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
         _playerActions = new _playerActions();
     }
 

@@ -25,17 +25,5 @@ public class Player : MonoBehaviour
     [SerializeField]
     internal float jumpForce;
     [SerializeField]
-    internal bool jumpPressed;
-    [SerializeField]
     internal float walkSpeed = 0;
-
-    //component references
-    internal Rigidbody2D rb;
-    internal CapsuleCollider2D capsuleCollider;
-
-    private void Awake()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        capsuleCollider = GetComponent<CapsuleCollider2D>();
-    }
 }
