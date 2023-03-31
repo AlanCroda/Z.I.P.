@@ -4,12 +4,16 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Player player;
-    Rigidbody2D rb;
+    [SerializeField] PlayerAnimations playerAnims;
+    public Rigidbody2D rb;
 
-    Vector2 _moveInput;
-    bool _jumpPressed;
+
     bool isWallSliding = false;
     int facingDirection = 1;
+
+    public Vector2 _moveInput;
+    public bool _jumpPressed;
+
     
 
     private void Start()
@@ -70,11 +74,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_jumpPressed)
         {
+            
             jump();
         }
         //var height
         if(!_jumpPressed && rb.velocity.y > 0) {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * player.fallMultiplier * Time.deltaTime);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * player.fallMultiplier);
         }
         if(rb.velocity.y < 0)
         {
@@ -87,8 +92,7 @@ public class PlayerMovement : MonoBehaviour
         if(player.collisionScript.isGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            //can jump
-            rb.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * player.jumpForce,ForceMode2D.Impulse);
         }
         else if(isWallSliding && !player.collisionScript.isGrounded()) 
         {
@@ -109,25 +113,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /*
-    internal void wallJump(int wallJumpDirection)
-    {
-        Vector2 force = new Vector2(player.wallJumpForce.x, player.wallJumpForce.y);
-        force.x *= wallJumpDirection;
-
-        if (Mathf.Sign(rb.velocity.x) != Mathf.Sign(force.x))
-        {
-            force.x -= rb.velocity.x;
-        }
-
-        if (rb.velocity.y < 0)
-        {
-            force.y -= rb.velocity.y;
-        }
-
-        rb.AddForce(force, ForceMode2D.Impulse);
-    }*/
-
     private void FixedUpdate()
     {
         move();
@@ -138,8 +123,18 @@ public class PlayerMovement : MonoBehaviour
     {
         _jumpPressed = (player.playerInput._jumpPressed > 0);
         _moveInput = player.playerInput._moveInput;
+
         isWallSliding = player.collisionScript.touchingWall();
         WallSliding();
+
+        if (_moveInput.x != 0 && player.collisionScript.isGrounded())
+        {
+            player.vfxRun.Play();
+        }
+        else if(_moveInput.x == 0 || !player.collisionScript.isGrounded())
+        {
+            player.vfxRun.Stop();
+        }
     }
 
 
