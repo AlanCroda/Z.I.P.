@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 _moveInput;
     public bool _jumpPressed = false;
     float lastJumpPressed;
+    float coyoteTime;
 
 
 
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+
     void move()
     {
         //calculate the direction we want to move in and our target velocity
@@ -34,7 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (!player.collisionScript.isGrounded() && rb.velocity.y < player.jumpHangTimeThreshold)
         {
-            TargetSpeed *= player.jumpHangMaxSpeedMultiplier;
+            SpeedDif *= player.jumpHangMaxSpeedMultiplier;
             accelRate *= player.jumpHangAccelerationMultiplier;
         }
 
@@ -46,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         {
             float amount = Mathf.Min(Mathf.Abs(rb.velocity.x), Mathf.Abs(player.frictionAmount));
             amount *= Mathf.Sign(rb.velocity.x);
-            rb.AddForce(Vector2.right * -amount, ForceMode2D.Force);
+            rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
         }
 
 
@@ -74,30 +76,16 @@ public class PlayerMovement : MonoBehaviour
 
     void jumpSetup()
     {
-        if (_jumpPressed)
+        if(player.collisionScript.isGrounded() && lastJumpPressed > 0)
         {
-            
-            //jump();
-        }
-        //var height
-        if(!_jumpPressed && rb.velocity.y > 0) {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * player.fallMultiplier);
-        }
-        if(rb.velocity.y < 0)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, player.maxFallSpeed));
-        }
-    }
-
-    internal void OnJump()
-    {
-        if(player.collisionScript.isGrounded())
-        {
+            lastJumpPressed = 0;
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(Vector2.up * player.jumpForce,ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);
         }
-        else if(isWallSliding && !player.collisionScript.isGrounded()) 
+
+        if(isWallSliding && !player.collisionScript.isGrounded() && lastJumpPressed > 0)
         {
+            lastJumpPressed = 0;
             Vector2 force = new Vector2(player.wallJumpForce.x, player.wallJumpForce.y);
             force.x *= facingDirection;
 
@@ -113,6 +101,48 @@ public class PlayerMovement : MonoBehaviour
 
             rb.AddForce(force, ForceMode2D.Impulse);
         }
+
+        if(!_jumpPressed && rb.velocity.y > 0) {
+            rb.AddForce(-Vector2.up * player.jumpCutValue, ForceMode2D.Impulse);
+        }
+        if(rb.velocity.y < 0)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, player.maxFallSpeed));
+        }
+    }
+
+    public void jump(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            lastJumpPressed = player.jumpBuffer;
+            if (coyoteTime > 0)
+            {
+                lastJumpPressed = 0;
+                coyoteTime = 0;
+                rb.velocity = new Vector2(rb.velocity.x, 0);
+                rb.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);
+            }
+            else if (isWallSliding && !player.collisionScript.isGrounded())
+            {
+                lastJumpPressed = 0;
+                rb.velocity = Vector2.zero;
+                Vector2 force = new Vector2(player.wallJumpForce.x, player.wallJumpForce.y);
+                force.x *= facingDirection;
+
+                if (Mathf.Sign(rb.velocity.x) != Mathf.Sign(force.x))
+                {
+                    force.x -= rb.velocity.x;
+                }
+
+                if (rb.velocity.y < 0)
+                {
+                    force.y -= rb.velocity.y;
+                }
+
+                rb.AddForce(force, ForceMode2D.Impulse);
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -125,6 +155,12 @@ public class PlayerMovement : MonoBehaviour
     {
         _jumpPressed = (player.playerInput._jumpPressed > 0);
 
+        lastJumpPressed -= Time.deltaTime;
+        coyoteTime -= Time.deltaTime;
+        if(player.collisionScript.isGrounded())
+        {
+            coyoteTime = player.coyoteBufferTime;
+        }
 
         _moveInput = player.playerInput._moveInput;
 
