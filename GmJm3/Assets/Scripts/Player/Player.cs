@@ -49,6 +49,12 @@ public class Player : MonoBehaviour
     internal int amountOfJumps;
     [SerializeField]
     internal float wallSlideSpeed;
+    [SerializeField]
+    internal float jumpCutValue;
+    [SerializeField]
+    internal float jumpBuffer;
+    [SerializeField]
+    internal float coyoteBufferTime;
 
     [Header("GroundCheck")]
     [SerializeField]
@@ -60,7 +66,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     internal float rightDistance;
     [SerializeField]
-    internal float rightBoxCastOffset;
+    internal float leftDistance;
+    [SerializeField]
+    internal float sideBoxCastOffset;
 
     [Header("Particle Effects")]
     [SerializeField]

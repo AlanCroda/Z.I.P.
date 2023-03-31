@@ -781,6 +781,7 @@ GameObject:
   - component: {fileID: 5486973127599547363}
   - component: {fileID: 3853396336209925631}
   - component: {fileID: 4616408950334352948}
+  - component: {fileID: 4933568095837284984}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -820,7 +821,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 6200000, guid: 30c5ae8eb06247b44867c0a75baad666, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 0
@@ -841,15 +842,32 @@ MonoBehaviour:
   playerInput: {fileID: 5486973127599547362}
   playerMovement: {fileID: 5486973127599547372}
   collisionScript: {fileID: 5486973127599547373}
-  health: 0
   ground:
     serializedVersion: 2
     m_Bits: 64
-  jumpForce: 350
-  fallMultiplier: 0.5
-  walkSpeed: 7
-  BoxSize: {x: 0.21, y: 0.05, z: 0}
-  maxDistance: 0.65
+  walkSpeed: 12
+  acceleration: 3
+  decceleration: 5
+  frictionAmount: -0.5
+  facingRight: 1
+  jumpForce: 18
+  fallMultiplier: -0.1
+  maxFallSpeed: -15
+  jumpHangTimeThreshold: 1
+  jumpHangAccelerationMultiplier: 1.1
+  jumpHangMaxSpeedMultiplier: 1.3
+  wallJumpForce: {x: 10, y: 15}
+  jumpsLeft: 0
+  wallSlideSpeed: 2
+  jumpCutValue: 3
+  jumpBuffer: 0.2
+  coyoteBufferTime: 0.05
+  bottomBoxSize: {x: 0.4, y: 0.05, z: 0}
+  rightBoxSize: {x: 0.2, y: 0.65, z: 0}
+  bottomDistance: 0.645
+  rightDistance: -0.195
+  leftDistance: -0.23
+  sideBoxCastOffset: 0.3
   vfxRun: {fileID: 7588273129384668063}
 --- !u!114 &5486973127599547372
 MonoBehaviour:
@@ -970,7 +988,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01, y: -0.3431597}
+  m_Offset: {x: -0.015423775, y: -0.29089928}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -981,8 +999,58 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24995041, y: 0.598013}
+  m_Size: {x: 0.41944313, y: 0.70253384}
   m_EdgeRadius: 0
+--- !u!114 &4933568095837284984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486973127599547381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 127aef0662277dd45b97a13aba138417, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fe7a17d9-a164-4dd6-9681-715dd0a85684
+    m_ActionName: Player/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5486973127599547372}
+        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
+        m_MethodName: jump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1586d905-79fd-4f9e-b9d4-1cf135ce95d6
+    m_ActionName: Player/Jump[/Keyboard/space,/Keyboard/j]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &7588273129384668130
 GameObject:
   m_ObjectHideFlags: 0

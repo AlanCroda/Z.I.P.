@@ -11,7 +11,10 @@ public class PlayerCollision : MonoBehaviour
         Gizmos.DrawCube(transform.position-transform.up*player.bottomDistance,player.bottomBoxSize);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position - transform.right * player.rightDistance - transform.up * player.rightBoxCastOffset, player.rightBoxSize);
+        Gizmos.DrawCube(transform.position - transform.right * player.rightDistance - transform.up * player.sideBoxCastOffset, player.rightBoxSize);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(transform.position + transform.right * player.leftDistance - transform.up * player.sideBoxCastOffset, player.rightBoxSize);
     }
 
     internal bool isGrounded()
@@ -20,6 +23,7 @@ public class PlayerCollision : MonoBehaviour
         {
             return true;
         }
+
         else
         {
             return false;
@@ -28,7 +32,11 @@ public class PlayerCollision : MonoBehaviour
 
     internal bool touchingWall()
     {
-        if (Physics2D.BoxCast(transform.position - transform.up * player.rightBoxCastOffset, player.rightBoxSize, 0, -transform.right, player.rightDistance, player.ground))
+        if (Physics2D.BoxCast(transform.position - transform.up * player.sideBoxCastOffset, player.rightBoxSize, 0, -transform.right, player.rightDistance, player.ground))
+        {
+            return true;
+        }
+        if (Physics2D.BoxCast(transform.position - transform.up * player.sideBoxCastOffset, player.rightBoxSize, 0, transform.right, player.leftDistance, player.ground))
         {
             return true;
         }
