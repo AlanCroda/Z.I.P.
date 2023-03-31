@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Floating : MonoBehaviour
 {
     [SerializeField] Player _player;
+    [SerializeField] PlayerMovement _playerMovement;
     [SerializeField] bool _isFloating;
     [SerializeField] float _floatSpeed;
     private float _noFloatSpeed;
@@ -13,6 +14,7 @@ public class Floating : MonoBehaviour
     private void Awake()
     {
         _player = GetComponent<Player>();
+        _playerMovement = GetComponent<PlayerMovement>();
         _noFloatSpeed = _player.maxFallSpeed;
     }
 
@@ -26,9 +28,7 @@ public class Floating : MonoBehaviour
 
     public void checkFloat()
     {
-        // TODO: Research how to use "Jump" InputSystem event as a KeyHeldDown to activate this method,
-        // for now it's bound to Spacebar held down.
-        if (Input.GetKey(KeyCode.Space))
+        if (_playerMovement._jumpPressed)
         {
             _isFloating = true;
         }
