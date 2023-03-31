@@ -13,25 +13,54 @@ public class Player : MonoBehaviour
     [SerializeField]
     internal PlayerCollision collisionScript;
 
-    [Header("Health")]
-    [SerializeField]
-    internal int health;
-
     [Header("Layers")]
     [SerializeField]
     internal LayerMask ground;
 
     [Header("Movement")]
     [SerializeField]
+    internal float walkSpeed;
+    [SerializeField]
+    internal float acceleration;
+    [SerializeField]
+    internal float decceleration;
+    [SerializeField]
+    internal float frictionAmount;
+    [SerializeField]
+    internal bool facingRight;
+
+    [Header("Jumping")]
+    [SerializeField]
     internal float jumpForce;
     [SerializeField]
     internal float fallMultiplier;
     [SerializeField]
-    internal float walkSpeed = 0;
+    internal float maxFallSpeed;
     [SerializeField]
-    internal Vector3 BoxSize;
+    internal float jumpHangTimeThreshold;
     [SerializeField]
-    internal float maxDistance;
+    internal float jumpHangAccelerationMultiplier;
+    [SerializeField]
+    internal float jumpHangMaxSpeedMultiplier;
+    [SerializeField]
+    internal Vector2 wallJumpForce;
+    [SerializeField]
+    internal int jumpsLeft;
+    internal int amountOfJumps;
+    [SerializeField]
+    internal float wallSlideSpeed;
+
+    [Header("GroundCheck")]
+    [SerializeField]
+    internal Vector3 bottomBoxSize;
+    [SerializeField]
+    internal Vector3 rightBoxSize;
+    [SerializeField]
+    internal float bottomDistance;
+    [SerializeField]
+    internal float rightDistance;
+    [SerializeField]
+    internal float rightBoxCastOffset;
 
     [Header("Particle Effects")]
     [SerializeField]
