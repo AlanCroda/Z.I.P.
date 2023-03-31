@@ -836,7 +836,6 @@ GameObject:
   m_Component:
   - component: {fileID: 144897576}
   - component: {fileID: 144897579}
-  - component: {fileID: 144897578}
   - component: {fileID: 144897577}
   m_Layer: 0
   m_Name: cm
@@ -872,7 +871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 1
+  m_BindingMode: 4
   m_FollowOffset: {x: 0, y: 0, z: -10}
   m_XDamping: 1
   m_YDamping: 1
@@ -882,33 +881,6 @@ MonoBehaviour:
   m_YawDamping: 0
   m_RollDamping: 0
   m_AngularDamping: 0
---- !u!114 &144897578
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 144897575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4044717213e31446939f7bd49c896ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_TrackedObjectOffset: {x: 0, y: 0, z: 0}
-  m_LookaheadTime: 0
-  m_LookaheadSmoothing: 0
-  m_LookaheadIgnoreY: 0
-  m_HorizontalDamping: 0.5
-  m_VerticalDamping: 0.5
-  m_ScreenX: 0.5
-  m_ScreenY: 0.5
-  m_DeadZoneWidth: 0
-  m_DeadZoneHeight: 0
-  m_SoftZoneWidth: 0.8
-  m_SoftZoneHeight: 0.8
-  m_BiasX: 0
-  m_BiasY: 0
-  m_CenterOnActivate: 1
 --- !u!114 &144897579
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -107075,7 +107047,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.01, y: -0.3431597}
+  m_Offset: {x: -0.015423775, y: -0.29089928}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -107086,7 +107058,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.24995041, y: 0.598013}
+  m_Size: {x: 0.41944313, y: 0.70253384}
   m_EdgeRadius: 0
 --- !u!4 &6644205529134083330
 Transform:
@@ -107120,7 +107092,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 5
   m_Material: {fileID: 6200000, guid: 30c5ae8eb06247b44867c0a75baad666, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 0
@@ -107141,15 +107113,28 @@ MonoBehaviour:
   playerInput: {fileID: 6644205529134083336}
   playerMovement: {fileID: 6644205529134083334}
   collisionScript: {fileID: 6644205529134083335}
-  health: 0
   ground:
     serializedVersion: 2
     m_Bits: 64
-  jumpForce: 350
-  fallMultiplier: 0.5
-  walkSpeed: 7
-  BoxSize: {x: 0.21, y: 0.05, z: 0}
-  maxDistance: 0.65
+  walkSpeed: 12
+  acceleration: 3
+  decceleration: 5
+  frictionAmount: 1
+  facingRight: 1
+  jumpForce: 18
+  fallMultiplier: -0.1
+  maxFallSpeed: -25
+  jumpHangTimeThreshold: 1
+  jumpHangAccelerationMultiplier: 1.1
+  jumpHangMaxSpeedMultiplier: 1.3
+  wallJumpForce: {x: 10, y: 15}
+  jumpsLeft: 0
+  wallSlideSpeed: 1
+  bottomBoxSize: {x: 0.4, y: 0.02, z: 0}
+  rightBoxSize: {x: 0.02, y: 0.65, z: 0}
+  bottomDistance: 0.645
+  rightDistance: -0.195
+  rightBoxCastOffset: 0.3
   vfxRun: {fileID: 867291968}
 --- !u!114 &6644205529134083334
 MonoBehaviour:
@@ -107262,6 +107247,7 @@ GameObject:
   - component: {fileID: 6644205529134083337}
   - component: {fileID: 6644205529134083360}
   - component: {fileID: 5765054198266372318}
+  - component: {fileID: 6644205529134083361}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -107284,3 +107270,33 @@ MonoBehaviour:
   _anim: {fileID: 1215779800}
   _movement: {fileID: 0}
   collision: {fileID: 0}
+--- !u!114 &6644205529134083361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6644205529134083359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 127aef0662277dd45b97a13aba138417, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Player))]
 public class PlayerMovement : MonoBehaviour
@@ -9,12 +10,13 @@ public class PlayerMovement : MonoBehaviour
 
 
     bool isWallSliding = false;
-    int facingDirection = 1;
+    int facingDirection = -1;
 
     public Vector2 _moveInput;
-    public bool _jumpPressed;
+    public bool _jumpPressed = false;
+    float lastJumpPressed;
 
-    
+
 
     private void Start()
     {
@@ -75,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
         if (_jumpPressed)
         {
             
-            jump();
+            //jump();
         }
         //var height
         if(!_jumpPressed && rb.velocity.y > 0) {
@@ -87,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    internal void jump()
+    internal void OnJump()
     {
         if(player.collisionScript.isGrounded())
         {
@@ -122,6 +124,8 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         _jumpPressed = (player.playerInput._jumpPressed > 0);
+
+
         _moveInput = player.playerInput._moveInput;
 
         isWallSliding = player.collisionScript.touchingWall();

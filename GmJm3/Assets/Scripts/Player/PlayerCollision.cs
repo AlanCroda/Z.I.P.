@@ -8,15 +8,15 @@ public class PlayerCollision : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position-transform.up*player.maxDistance,player.bottomBoxSize);
+        Gizmos.DrawCube(transform.position-transform.up*player.bottomDistance,player.bottomBoxSize);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawCube(transform.position - transform.right/2 * player.maxDistance, player.rightBoxSize);
+        Gizmos.DrawCube(transform.position - transform.right * player.rightDistance - transform.up * player.rightBoxCastOffset, player.rightBoxSize);
     }
 
     internal bool isGrounded()
     {
-        if(Physics2D.BoxCast(transform.position,player.bottomBoxSize,0,-transform.up,player.maxDistance,player.ground))
+        if(Physics2D.BoxCast(transform.position,player.bottomBoxSize,0,-transform.up,player.bottomDistance,player.ground))
         {
             return true;
         }
@@ -28,7 +28,7 @@ public class PlayerCollision : MonoBehaviour
 
     internal bool touchingWall()
     {
-        if (Physics2D.BoxCast(transform.position, player.rightBoxSize, 0, -transform.right/2, player.maxDistance, player.ground))
+        if (Physics2D.BoxCast(transform.position - transform.up * player.rightBoxCastOffset, player.rightBoxSize, 0, -transform.right, player.rightDistance, player.ground))
         {
             return true;
         }

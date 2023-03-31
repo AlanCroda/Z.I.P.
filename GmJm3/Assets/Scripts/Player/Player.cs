@@ -48,17 +48,19 @@ public class Player : MonoBehaviour
     internal int jumpsLeft;
     internal int amountOfJumps;
     [SerializeField]
-    internal int wallSlideSpeed;
+    internal float wallSlideSpeed;
 
     [Header("GroundCheck")]
     [SerializeField]
     internal Vector3 bottomBoxSize;
     [SerializeField]
-    internal Vector3 leftBoxSize;
-    [SerializeField]
     internal Vector3 rightBoxSize;
     [SerializeField]
-    internal float maxDistance;
+    internal float bottomDistance;
+    [SerializeField]
+    internal float rightDistance;
+    [SerializeField]
+    internal float rightBoxCastOffset;
 
     [Header("Particle Effects")]
     [SerializeField]
