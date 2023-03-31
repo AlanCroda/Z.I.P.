@@ -26,7 +26,7 @@ public class PlayerInput : MonoBehaviour
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
         _moveInput.x = _playerActions.Player.Movement.ReadValue<Vector2>().x;
         _jumpPressed = _playerActions.Player.Jump.ReadValue<float>();
