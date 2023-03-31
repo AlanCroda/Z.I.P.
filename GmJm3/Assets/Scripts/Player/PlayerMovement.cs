@@ -4,10 +4,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Player player;
-    Rigidbody2D rb;
+    [SerializeField] PlayerAnimations playerAnims;
+    public Rigidbody2D rb;
 
-    Vector2 _moveInput;
-    bool _jumpPressed;
+    public Vector2 _moveInput;
+    public bool _jumpPressed;
     
 
     private void Start()
@@ -23,11 +24,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_jumpPressed)
         {
+            
             jump();
         }
         //var height
         if(!_jumpPressed && rb.velocity.y > 0) {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * player.fallMultiplier * Time.deltaTime);
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * player.fallMultiplier);
         }
     }
 
@@ -35,8 +37,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if(player.collisionScript.isGrounded())
         {
+            
             //can jump
-            rb.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);
+            //rb.AddForce(Vector2.up * player.jumpForce,ForceMode2D.Impulse);
+            rb.velocity = new Vector2(rb.velocity.x, player.jumpForce * Time.deltaTime);
         }
     }
 
@@ -51,6 +55,16 @@ public class PlayerMovement : MonoBehaviour
     {
         _jumpPressed = (player.playerInput._jumpPressed > 0);
         _moveInput = player.playerInput._moveInput;
+        if (_moveInput.x != 0 && player.collisionScript.isGrounded())
+        {
+            player.vfxRun.Play();
+        }
+        else if(_moveInput.x == 0 || !player.collisionScript.isGrounded())
+        {
+            player.vfxRun.Stop();
+        }
+
+
     }
 
 

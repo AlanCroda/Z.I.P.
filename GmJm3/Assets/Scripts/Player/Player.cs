@@ -32,4 +32,8 @@ public class Player : MonoBehaviour
     internal Vector3 BoxSize;
     [SerializeField]
     internal float maxDistance;
+
+    [Header("Particle Effects")]
+    [SerializeField]
+    internal ParticleSystem vfxRun;
 }
