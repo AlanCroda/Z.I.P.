@@ -73,4 +73,7 @@ public class Player : MonoBehaviour
     [Header("Particle Effects")]
     [SerializeField]
     internal ParticleSystem vfxRun;
+
+    [Header("Powerups")]
+    [SerializeField] internal bool hasFloatingPowerup;
 }

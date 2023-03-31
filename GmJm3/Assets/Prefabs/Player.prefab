@@ -869,6 +869,7 @@ MonoBehaviour:
   leftDistance: -0.23
   sideBoxCastOffset: 0.3
   vfxRun: {fileID: 7588273129384668063}
+  hasFloatingPowerup: 1
 --- !u!114 &5486973127599547372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -948,6 +949,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d994e6d2d5e326c45b564e0127b969c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _isFloating: 0
+  _floatSpeed: 0
 --- !u!114 &5486973127599547363
 MonoBehaviour:
   m_ObjectHideFlags: 0
