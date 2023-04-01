@@ -23,6 +23,7 @@ public class PlayerCollision : MonoBehaviour
         {
             player.canDoubleJump = true;
             player.floating.currentFloatTime = player.floatTime;
+            player.canDash = true;
         }
     }
 

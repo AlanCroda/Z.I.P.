@@ -843,6 +843,7 @@ MonoBehaviour:
   collisionScript: {fileID: 5486973127599547373}
   doubleJump: {fileID: 6461554776243187984}
   floating: {fileID: 5486973127599547360}
+  dash: {fileID: 5486973127599547363}
   ground:
     serializedVersion: 2
     m_Bits: 64
@@ -851,6 +852,7 @@ MonoBehaviour:
   decceleration: 5
   frictionAmount: -0.5
   facingRight: 1
+  hasControl: 1
   jumpForce: 18
   fallMultiplier: -0.1
   maxFallSpeed: -15
@@ -876,6 +878,10 @@ MonoBehaviour:
   hasDoubleJumpPowerup: 1
   canDoubleJump: 1
   doubleJumpForce: 15
+  hasDashPowerup: 1
+  canDash: 0
+  dashForce: 25
+  dashTime: 0.1
 --- !u!114 &5486973127599547372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -962,6 +968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aae0878d2537d3a4ba8ee5c23f35be98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 5486973127599547375}
 --- !u!114 &6461554776243187984
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1046,6 +1053,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1586d905-79fd-4f9e-b9d4-1cf135ce95d6
     m_ActionName: Player/Jump[/Keyboard/space,/Keyboard/j]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: cbc9cdab-54f4-40f7-ab91-21b4f239f3c7
+    m_ActionName: Player/Float[/Keyboard/k,/Keyboard/x]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5486973127599547363}
+        m_TargetAssemblyTypeName: Dash, Assembly-CSharp
+        m_MethodName: dash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: fa4a8b7e-622d-48bc-988b-5cb438e4a54b
+    m_ActionName: Player/Dash[/Keyboard/l,/Keyboard/c]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

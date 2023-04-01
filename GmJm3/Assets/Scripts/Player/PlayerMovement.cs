@@ -155,8 +155,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        move();
-        jumpSetup();
+        if(player.hasControl)
+        {
+            move();
+            jumpSetup();
+        }
     }
 
     private void Update()
