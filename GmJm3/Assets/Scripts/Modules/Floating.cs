@@ -7,57 +7,50 @@ public class Floating : MonoBehaviour
 {
     [SerializeField] Player _player;
     [SerializeField] PlayerMovement _playerMovement;
-    [SerializeField] float _floatSpeed, floatHorizontalSpeed;
-    [SerializeField] ParticleSystem VFXFloat;
-    public bool _isFloating;
+
     private float _noFloatSpeed;
+    [HideInInspector] public float currentFloatTime;
 
     private void Awake()
     {
         _player = GetComponent<Player>();
         _playerMovement = GetComponent<PlayerMovement>();
         _noFloatSpeed = _player.maxFallSpeed;
-        floatHorizontalSpeed = _player.walkSpeed;
+        currentFloatTime = _player.floatTime;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        if (_player.hasFloatingPowerup)
+        if (_player.hasFloatingPowerup && _player.hasControl)
         {
             checkFloat();
         }
-
-        if (_isFloating)
+        if(!_player.hasControl)
         {
-            VFXFloat.Play();
-        }
-        else
-        {
-            VFXFloat.Stop();    
+            _player._isFloating = false;
+            _player.maxFallSpeed = _noFloatSpeed;
         }
     }
 
     public void checkFloat()
     {
-        if (_playerMovement._jumpPressed)
+        if (_player.playerInput._floatPressed > 0 && currentFloatTime > 0)
         {
-            _isFloating = true;
+            _player._isFloating = true;
         }
         else
         {
-            _isFloating = false;
+            _player._isFloating = false;
         }
 
-        if (_isFloating && !_player.collisionScript.isGrounded())
+        if (_player._isFloating && !_player.collisionScript.isGrounded())
         {
-            _player.maxFallSpeed = _floatSpeed;
-            ///_player.walkSpeed = floatHorizontalSpeed/2; slow down floating speed but affects normal jump speed.
+            currentFloatTime -= Time.deltaTime;
+            _player.maxFallSpeed = _player.floatSpeed;
         }
         else
         {
             _player.maxFallSpeed = _noFloatSpeed;
-            // _player.walkSpeed = floatHorizontalSpeed; slow down floating speed but affects normal jump speed.
-
         }
     }
 }

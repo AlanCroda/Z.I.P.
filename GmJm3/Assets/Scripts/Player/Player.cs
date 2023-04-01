@@ -12,6 +12,12 @@ public class Player : MonoBehaviour
     internal PlayerMovement playerMovement;
     [SerializeField]
     internal PlayerCollision collisionScript;
+    [SerializeField]
+    internal DoubleJump doubleJump;
+    [SerializeField]
+    internal Floating floating;
+    [SerializeField]
+    internal Dash dash;
 
     [Header("Layers")]
     [SerializeField]
@@ -28,6 +34,8 @@ public class Player : MonoBehaviour
     internal float frictionAmount;
     [SerializeField]
     internal bool facingRight;
+    [SerializeField]
+    internal bool hasControl;
 
     [Header("Jumping")]
     [SerializeField]
@@ -44,9 +52,6 @@ public class Player : MonoBehaviour
     internal float jumpHangMaxSpeedMultiplier;
     [SerializeField]
     internal Vector2 wallJumpForce;
-    [SerializeField]
-    internal int jumpsLeft;
-    internal int amountOfJumps;
     [SerializeField]
     internal float wallSlideSpeed;
     [SerializeField]
@@ -75,5 +80,26 @@ public class Player : MonoBehaviour
     internal ParticleSystem vfxRun;
 
     [Header("Powerups")]
-    [SerializeField] internal bool hasFloatingPowerup;
+    [SerializeField]
+    internal bool hasFloatingPowerup;
+    [SerializeField]
+    internal bool _isFloating;
+    [SerializeField]
+    internal float floatTime;
+    [SerializeField]
+    internal float floatSpeed;
+    [SerializeField]
+    internal bool hasDoubleJumpPowerup;
+    [SerializeField]
+    internal bool canDoubleJump;
+    [SerializeField]
+    internal float doubleJumpForce;
+    [SerializeField]
+    internal bool hasDashPowerup;
+    [SerializeField]
+    internal bool canDash;
+    [SerializeField]
+    internal float dashForce;
+    [SerializeField]
+    internal float dashTime;
 }
