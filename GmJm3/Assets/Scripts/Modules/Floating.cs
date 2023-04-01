@@ -21,9 +21,14 @@ public class Floating : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_player.hasFloatingPowerup)
+        if (_player.hasFloatingPowerup && _player.hasControl)
         {
             checkFloat();
+        }
+        if(!_player.hasControl)
+        {
+            _player._isFloating = false;
+            _player.maxFallSpeed = _noFloatSpeed;
         }
     }
 

@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
     internal DoubleJump doubleJump;
     [SerializeField]
     internal Floating floating;
+    [SerializeField]
+    internal Dash dash;
 
     [Header("Layers")]
     [SerializeField]
@@ -32,6 +34,8 @@ public class Player : MonoBehaviour
     internal float frictionAmount;
     [SerializeField]
     internal bool facingRight;
+    [SerializeField]
+    internal bool hasControl;
 
     [Header("Jumping")]
     [SerializeField]
@@ -90,4 +94,12 @@ public class Player : MonoBehaviour
     internal bool canDoubleJump;
     [SerializeField]
     internal float doubleJumpForce;
+    [SerializeField]
+    internal bool hasDashPowerup;
+    [SerializeField]
+    internal bool canDash;
+    [SerializeField]
+    internal float dashForce;
+    [SerializeField]
+    internal float dashTime;
 }
