@@ -779,6 +779,7 @@ GameObject:
   - component: {fileID: 5486973127599547360}
   - component: {fileID: 5486973127599547363}
   - component: {fileID: 6461554776243187984}
+  - component: {fileID: 1100662946692373858}
   - component: {fileID: 4616408950334352948}
   - component: {fileID: 4933568095837284984}
   m_Layer: 0
@@ -871,14 +872,14 @@ MonoBehaviour:
   leftDistance: -0.23
   sideBoxCastOffset: 0.3
   vfxRun: {fileID: 7588273129384668063}
-  hasFloatingPowerup: 1
+  hasFloatingPowerup: 0
   _isFloating: 0
   floatTime: 1.5
   floatSpeed: -1
-  hasDoubleJumpPowerup: 1
+  hasDoubleJumpPowerup: 0
   canDoubleJump: 1
   doubleJumpForce: 15
-  hasDashPowerup: 1
+  hasDashPowerup: 0
   canDash: 0
   dashForce: 25
   dashTime: 0.1
@@ -982,6 +983,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5486973127599547375}
+--- !u!114 &1100662946692373858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486973127599547381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a79d3fffc7f8c7499b4872cba0df255, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 5486973127599547375}
+  terminal: {fileID: 3599720006435092682, guid: b79c055b759bf7e4795b777d04ec783b, type: 3}
 --- !u!61 &4616408950334352948
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1073,6 +1088,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fa4a8b7e-622d-48bc-988b-5cb438e4a54b
     m_ActionName: Player/Dash[/Keyboard/l,/Keyboard/c]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1100662946692373858}
+        m_TargetAssemblyTypeName: PlayerInteractions, Assembly-CSharp
+        m_MethodName: interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e8ee84a0-b1c4-41f3-9dd6-868f90607076
+    m_ActionName: Player/Interact[/Keyboard/e,/Keyboard/rightCtrl,/Keyboard/upArrow]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player

@@ -14,7 +14,7 @@ public class DoubleJump : MonoBehaviour
 
     public void doubleJump()
     {
-        if(!player.collisionScript.isGrounded() && !player.collisionScript.touchingWall() && player.canDoubleJump)
+        if(!player.collisionScript.isGrounded() && !player.collisionScript.touchingWall() && player.canDoubleJump && player.hasDoubleJumpPowerup)
         {
             player.playerMovement.lastJumpPressed = 0;
             player.canDoubleJump = false;
