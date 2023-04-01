@@ -78,6 +78,8 @@ public class Player : MonoBehaviour
     [Header("Particle Effects")]
     [SerializeField]
     internal ParticleSystem vfxRun;
+    [SerializeField]
+    internal ParticleSystem vfxFloat;
 
     [Header("Powerups")]
     [SerializeField]

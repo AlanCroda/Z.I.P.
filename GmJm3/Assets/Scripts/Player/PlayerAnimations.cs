@@ -8,14 +8,12 @@ public class PlayerAnimations : MonoBehaviour
     [SerializeField] private PlayerMovement _movement;
     [SerializeField] private PlayerCollision collision;
     [SerializeField] private Player playerVariables;
-    [SerializeField] private Floating floatScript;
     private float _lockedTill;
 
     private void Start()
     {
         _movement = GetComponent<PlayerMovement>();
         collision = GetComponent<PlayerCollision>();
-        floatScript = GetComponent<Floating>();
         playerVariables = GetComponent<Player>();
     }
 
@@ -23,7 +21,7 @@ public class PlayerAnimations : MonoBehaviour
     {
         var state = GetState();
         
-        floatScript._isFloating = false;
+        playerVariables._isFloating = false;
         if (state == _currentState) return;
         _anim.CrossFade(state, 0.1f, 0);
         _currentState = state;
@@ -37,7 +35,7 @@ public class PlayerAnimations : MonoBehaviour
 
         if (_movement._jumpPressed) return LockState(Jump, 0.01f);
         if (_movement._moveInput.x ==0) return Idle;
-        if (floatScript._isFloating && playerVariables.maxFallSpeed == 0) return LockState(Floating, 0.1f);
+        if (playerVariables._isFloating && playerVariables.floatSpeed == 0) return LockState(Floating, 0.1f);
         if (collision.isGrounded()) return _movement._moveInput.x == 0 ? Idle : Walk; 
         return _movement.rb.velocity.y > 0 ? Jump : Walk;
 

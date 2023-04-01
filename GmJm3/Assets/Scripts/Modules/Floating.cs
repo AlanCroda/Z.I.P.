@@ -19,7 +19,7 @@ public class Floating : MonoBehaviour
         currentFloatTime = _player.floatTime;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_player.hasFloatingPowerup && _player.hasControl)
         {
@@ -29,6 +29,15 @@ public class Floating : MonoBehaviour
         {
             _player._isFloating = false;
             _player.maxFallSpeed = _noFloatSpeed;
+        }
+
+        if (_player._isFloating)
+        {
+            _player.vfxFloat.Play();
+        }
+        else
+        {
+            _player.vfxFloat.Stop();
         }
     }
 

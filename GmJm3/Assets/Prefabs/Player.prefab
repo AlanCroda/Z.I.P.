@@ -872,14 +872,14 @@ MonoBehaviour:
   leftDistance: -0.23
   sideBoxCastOffset: 0.3
   vfxRun: {fileID: 7588273129384668063}
-  hasFloatingPowerup: 0
+  hasFloatingPowerup: 1
   _isFloating: 0
   floatTime: 1.5
   floatSpeed: -1
-  hasDoubleJumpPowerup: 0
+  hasDoubleJumpPowerup: 1
   canDoubleJump: 1
   doubleJumpForce: 15
-  hasDashPowerup: 0
+  hasDashPowerup: 1
   canDash: 0
   dashForce: 25
   dashTime: 0.1
@@ -940,8 +940,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _anim: {fileID: 7588273127853648647}
-  _movement: {fileID: 0}
-  collision: {fileID: 0}
+  _movement: {fileID: 5486973127599547372}
+  collision: {fileID: 5486973127599547373}
+  playerVariables: {fileID: 5486973127599547375}
 --- !u!114 &5486973127599547360
 MonoBehaviour:
   m_ObjectHideFlags: 0
