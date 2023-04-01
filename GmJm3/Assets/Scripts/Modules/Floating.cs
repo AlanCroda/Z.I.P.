@@ -7,15 +7,16 @@ public class Floating : MonoBehaviour
 {
     [SerializeField] Player _player;
     [SerializeField] PlayerMovement _playerMovement;
-    [SerializeField] bool _isFloating;
-    [SerializeField] float _floatSpeed;
+
     private float _noFloatSpeed;
+    [HideInInspector] public float currentFloatTime;
 
     private void Awake()
     {
         _player = GetComponent<Player>();
         _playerMovement = GetComponent<PlayerMovement>();
         _noFloatSpeed = _player.maxFallSpeed;
+        currentFloatTime = _player.floatTime;
     }
 
     private void FixedUpdate()
@@ -28,18 +29,19 @@ public class Floating : MonoBehaviour
 
     public void checkFloat()
     {
-        if (_playerMovement._jumpPressed)
+        if (_player.playerInput._floatPressed > 0 && currentFloatTime > 0)
         {
-            _isFloating = true;
+            _player._isFloating = true;
         }
         else
         {
-            _isFloating = false;
+            _player._isFloating = false;
         }
 
-        if (_isFloating && !_player.collisionScript.isGrounded())
+        if (_player._isFloating && !_player.collisionScript.isGrounded())
         {
-            _player.maxFallSpeed = _floatSpeed;
+            currentFloatTime -= Time.deltaTime;
+            _player.maxFallSpeed = _player.floatSpeed;
         }
         else
         {

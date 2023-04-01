@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
     internal PlayerMovement playerMovement;
     [SerializeField]
     internal PlayerCollision collisionScript;
+    [SerializeField]
+    internal DoubleJump doubleJump;
+    [SerializeField]
+    internal Floating floating;
 
     [Header("Layers")]
     [SerializeField]
@@ -45,9 +49,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     internal Vector2 wallJumpForce;
     [SerializeField]
-    internal int jumpsLeft;
-    internal int amountOfJumps;
-    [SerializeField]
     internal float wallSlideSpeed;
     [SerializeField]
     internal float jumpCutValue;
@@ -75,5 +76,18 @@ public class Player : MonoBehaviour
     internal ParticleSystem vfxRun;
 
     [Header("Powerups")]
-    [SerializeField] internal bool hasFloatingPowerup;
+    [SerializeField]
+    internal bool hasFloatingPowerup;
+    [SerializeField]
+    internal bool _isFloating;
+    [SerializeField]
+    internal float floatTime;
+    [SerializeField]
+    internal float floatSpeed;
+    [SerializeField]
+    internal bool hasDoubleJumpPowerup;
+    [SerializeField]
+    internal bool canDoubleJump;
+    [SerializeField]
+    internal float doubleJumpForce;
 }

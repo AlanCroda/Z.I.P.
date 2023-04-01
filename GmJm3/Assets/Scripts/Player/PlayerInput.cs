@@ -9,6 +9,7 @@ public class PlayerInput : MonoBehaviour
 
     internal Vector2 _moveInput;
     internal float _jumpPressed;
+    internal float _floatPressed;
 
     private void Awake()
     {
@@ -31,5 +32,6 @@ public class PlayerInput : MonoBehaviour
     {
         _moveInput.x = _playerActions.Player.Movement.ReadValue<Vector2>().x;
         _jumpPressed = _playerActions.Player.Jump.ReadValue<float>();
+        _floatPressed = _playerActions.Player.Float.ReadValue<float>();
     }
 }

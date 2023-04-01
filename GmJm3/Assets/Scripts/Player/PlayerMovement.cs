@@ -6,15 +6,17 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Player player;
     [SerializeField] PlayerAnimations playerAnims;
-    public Rigidbody2D rb;
-
+    [HideInInspector] public Rigidbody2D rb;
 
     bool isWallSliding = false;
     int facingDirection = -1;
 
+    [HideInInspector]
     public Vector2 _moveInput;
+    [HideInInspector]
     public bool _jumpPressed = false;
-    float lastJumpPressed;
+    [HideInInspector]
+    public float lastJumpPressed;
     float coyoteTime;
 
 
@@ -82,7 +84,6 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);
         }
-
         if(isWallSliding && !player.collisionScript.isGrounded() && lastJumpPressed > 0)
         {
             lastJumpPressed = 0;
@@ -102,9 +103,16 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(force, ForceMode2D.Impulse);
         }
 
-        if(!_jumpPressed && rb.velocity.y > 0) {
+        if(lastJumpPressed > 0)
+        {
+            player.doubleJump.doubleJump();
+        }
+
+        if(!_jumpPressed && rb.velocity.y > 0)
+        {
             rb.AddForce(-Vector2.up * player.jumpCutValue, ForceMode2D.Impulse);
         }
+
         if(rb.velocity.y < 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, player.maxFallSpeed));
