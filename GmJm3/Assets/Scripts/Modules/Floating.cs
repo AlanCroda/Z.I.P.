@@ -7,8 +7,9 @@ public class Floating : MonoBehaviour
 {
     [SerializeField] Player _player;
     [SerializeField] PlayerMovement _playerMovement;
-    [SerializeField] bool _isFloating;
-    [SerializeField] float _floatSpeed;
+    [SerializeField] float _floatSpeed, floatHorizontalSpeed;
+    [SerializeField] ParticleSystem VFXFloat;
+    public bool _isFloating;
     private float _noFloatSpeed;
 
     private void Awake()
@@ -16,13 +17,23 @@ public class Floating : MonoBehaviour
         _player = GetComponent<Player>();
         _playerMovement = GetComponent<PlayerMovement>();
         _noFloatSpeed = _player.maxFallSpeed;
+        floatHorizontalSpeed = _player.walkSpeed;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if (_player.hasFloatingPowerup)
         {
             checkFloat();
+        }
+
+        if (_isFloating)
+        {
+            VFXFloat.Play();
+        }
+        else
+        {
+            VFXFloat.Stop();    
         }
     }
 
@@ -40,10 +51,13 @@ public class Floating : MonoBehaviour
         if (_isFloating && !_player.collisionScript.isGrounded())
         {
             _player.maxFallSpeed = _floatSpeed;
+            ///_player.walkSpeed = floatHorizontalSpeed/2; slow down floating speed but affects normal jump speed.
         }
         else
         {
             _player.maxFallSpeed = _noFloatSpeed;
+            // _player.walkSpeed = floatHorizontalSpeed; slow down floating speed but affects normal jump speed.
+
         }
     }
 }
