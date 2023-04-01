@@ -17,6 +17,15 @@ public class PlayerCollision : MonoBehaviour
         Gizmos.DrawCube(transform.position + transform.right * player.leftDistance - transform.up * player.sideBoxCastOffset, player.rightBoxSize);
     }
 
+    private void Update()
+    {
+        if(isGrounded())
+        {
+            player.canDoubleJump = true;
+            player.floating.currentFloatTime = player.floatTime;
+        }
+    }
+
     internal bool isGrounded()
     {
         if(Physics2D.BoxCast(transform.position,player.bottomBoxSize,0,-transform.up,player.bottomDistance,player.ground))
