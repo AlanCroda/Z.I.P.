@@ -10,7 +10,7 @@ public class Dash : MonoBehaviour
 
     public void dash(InputAction.CallbackContext context)
     {
-        if(context.started && player.canDash)
+        if(context.started && player.canDash && player.hasDashPowerup)
         {
             player.hasControl = false;
             if (player.hasDashPowerup && player.playerInput._moveInput.magnitude > 0)
