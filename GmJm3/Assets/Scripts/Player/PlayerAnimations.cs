@@ -20,8 +20,7 @@ public class PlayerAnimations : MonoBehaviour
     private void Update()
     {
         var state = GetState();
-        
-        playerVariables._isFloating = false;
+
         if (state == _currentState) return;
         _anim.CrossFade(state, 0.1f, 0);
         _currentState = state;
@@ -30,12 +29,11 @@ public class PlayerAnimations : MonoBehaviour
     private int GetState()
     {
         if (Time.time < _lockedTill) return _currentState;
-
         // Priorities
 
         if (_movement._jumpPressed) return LockState(Jump, 0.01f);
+        if (playerVariables._isFloating) return LockState(Floating, 0.1f); 
         if (_movement._moveInput.x ==0) return Idle;
-        if (playerVariables._isFloating && playerVariables.floatSpeed == 0) return LockState(Floating, 0.1f);
         if (collision.isGrounded()) return _movement._moveInput.x == 0 ? Idle : Walk; 
         return _movement.rb.velocity.y > 0 ? Jump : Walk;
 

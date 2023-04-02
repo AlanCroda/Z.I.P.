@@ -784,7 +784,7 @@ GameObject:
   - component: {fileID: 4933568095837284984}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -873,15 +873,15 @@ MonoBehaviour:
   leftDistance: -0.23
   sideBoxCastOffset: 0.3
   vfxRun: {fileID: 7588273129384668063}
-  vfxFloat: {fileID: 0}
-  hasFloatingPowerup: 1
+  vfxFloat: {fileID: 9089936153231094594}
+  hasFloatingPowerup: 0
   _isFloating: 0
   floatTime: 1.5
   floatSpeed: -1
   hasDoubleJumpPowerup: 1
   canDoubleJump: 1
   doubleJumpForce: 15
-  hasDashPowerup: 1
+  hasDashPowerup: 0
   canDash: 0
   dashForce: 25
   dashTime: 0.1
@@ -958,7 +958,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
-  _playerMovement: {fileID: 0}
   currentFloatTime: 0
 --- !u!114 &5486973127599547363
 MonoBehaviour:
@@ -5984,5 +5983,10 @@ PrefabInstance:
 --- !u!4 &3518966071381995169 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2048570771768147520, guid: afc3d0a6c44a4c74b9125769b5e501eb, type: 3}
+  m_PrefabInstance: {fileID: 3222357128121209057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &9089936153231094594 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 5953174288722633635, guid: afc3d0a6c44a4c74b9125769b5e501eb, type: 3}
   m_PrefabInstance: {fileID: 3222357128121209057}
   m_PrefabAsset: {fileID: 0}
