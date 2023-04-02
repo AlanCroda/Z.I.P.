@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class Floating : MonoBehaviour
 {
     [SerializeField] Player _player;
-    [SerializeField] PlayerMovement _playerMovement;
 
     private float _noFloatSpeed;
     [HideInInspector] public float currentFloatTime;
@@ -14,7 +13,6 @@ public class Floating : MonoBehaviour
     private void Awake()
     {
         _player = GetComponent<Player>();
-        _playerMovement = GetComponent<PlayerMovement>();
         _noFloatSpeed = _player.maxFallSpeed;
         currentFloatTime = _player.floatTime;
     }

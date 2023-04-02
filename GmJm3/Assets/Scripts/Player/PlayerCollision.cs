@@ -21,9 +21,7 @@ public class PlayerCollision : MonoBehaviour
     {
         if(isGrounded())
         {
-            player.canDoubleJump = true;
-            player.floating.currentFloatTime = player.floatTime;
-            player.canDash = true;
+            ResetPowerups();
         }
     }
 
@@ -54,5 +52,12 @@ public class PlayerCollision : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void ResetPowerups()
+    {
+        player.canDoubleJump = true;
+        player.floating.currentFloatTime = player.floatTime;
+        player.canDash = true;
     }
 }
