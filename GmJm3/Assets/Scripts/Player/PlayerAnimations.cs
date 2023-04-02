@@ -31,8 +31,8 @@ public class PlayerAnimations : MonoBehaviour
         if (Time.time < _lockedTill) return _currentState;
         // Priorities
 
-        if (_movement._jumpPressed) return LockState(Jump, 0.01f);
-        if (playerVariables._isFloating) return LockState(Floating, 0.1f); 
+        if (_movement._jumpPressed) return Jump;
+        if (playerVariables._isFloating && !collision.isGrounded()) return Floating; 
         if (_movement._moveInput.x ==0) return Idle;
         if (collision.isGrounded()) return _movement._moveInput.x == 0 ? Idle : Walk; 
         return _movement.rb.velocity.y > 0 ? Jump : Walk;

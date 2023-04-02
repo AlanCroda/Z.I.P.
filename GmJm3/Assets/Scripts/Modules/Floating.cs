@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 public class Floating : MonoBehaviour
 {
     [SerializeField] Player _player;
+    [SerializeField] PlayerMovement _movement;
 
     private float _noFloatSpeed;
     [HideInInspector] public float currentFloatTime;
@@ -13,6 +14,7 @@ public class Floating : MonoBehaviour
     private void Awake()
     {
         _player = GetComponent<Player>();
+        _movement = GetComponent<PlayerMovement>();
         _noFloatSpeed = _player.maxFallSpeed;
         currentFloatTime = _player.floatTime;
     }
@@ -32,6 +34,7 @@ public class Floating : MonoBehaviour
         if (_player._isFloating)
         {
             _player.vfxFloat.Play();
+            _movement._jumpPressed = false;
         }
         else
         {
