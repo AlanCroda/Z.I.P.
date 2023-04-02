@@ -372,15 +372,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointA: 0
   pointB: 0
-  speed: 7
-  jumpHeight: 0
+  speed: 4
+  jumpHeight: 7
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   groundCheck: 0
   boxSize: {x: 0.45, y: 0.13}
   dir: 0
-  distance: 10
+  distance: 8
+  capsuleCollider: {fileID: 1101752164}
+  coolDown: 0.4
 --- !u!1 &1112700690
 GameObject:
   m_ObjectHideFlags: 0
