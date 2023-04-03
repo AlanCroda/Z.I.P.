@@ -784,6 +784,7 @@ GameObject:
   - component: {fileID: 4933568095837284984}
   - component: {fileID: 7551612865674297731}
   - component: {fileID: 7551612865674297732}
+  - component: {fileID: 1562260196729450129}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -846,6 +847,7 @@ MonoBehaviour:
   playerInput: {fileID: 5486973127599547362}
   playerMovement: {fileID: 5486973127599547372}
   collisionScript: {fileID: 5486973127599547373}
+  deathScript: {fileID: 1562260196729450129}
   doubleJump: {fileID: 6461554776243187984}
   floating: {fileID: 5486973127599547360}
   dash: {fileID: 5486973127599547363}
@@ -884,11 +886,12 @@ MonoBehaviour:
   floatSpeed: -2
   hasDoubleJumpPowerup: 1
   canDoubleJump: 1
-  doubleJumpForce: 25
-  hasDashPowerup: 0
+  doubleJumpForce: 17
+  hasDashPowerup: 1
   canDash: 0
   dashForce: 25
   dashTime: 0.1
+  checkpointPosition: {x: 0, y: 0, z: 0}
   sfxWalk: {fileID: 8300000, guid: 429be27a20cba15429ffbfacd4281ef3, type: 3}
   sfxJump: {fileID: 8300000, guid: f313f8d8d08a804448864945d477cabe, type: 3}
   sfxWallSlide: {fileID: 8300000, guid: a1c9d550ef6bdcf41aa88ba8a5700e8b, type: 3}
@@ -1229,6 +1232,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c96c66dd75f5b544db65e257487e19b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1562260196729450129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486973127599547381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2fbfd6684e5b054e8ae214d6df4a990, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 5486973127599547375}
 --- !u!1 &5613150882253693506
 GameObject:
   m_ObjectHideFlags: 0

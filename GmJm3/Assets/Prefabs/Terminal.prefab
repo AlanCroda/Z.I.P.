@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db28cd00010a0434e983b5a6e5290d40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  doubleJumpPickup: 1
+  doubleJumpPickup: 0
   floatPickup: 0
-  dashPickup: 0
+  dashPickup: 1
   player: {fileID: 5486973127599547375, guid: c81f1afa89364b542955dbccde26245a, type: 3}
