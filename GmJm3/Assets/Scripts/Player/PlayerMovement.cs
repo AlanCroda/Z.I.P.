@@ -188,22 +188,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (_moveInput.x != 0 && player.collisionScript.isGrounded())
         {
-            player.vfxRun.Play();
-            
-        }
-        else if(_moveInput.x == 0 || !player.collisionScript.isGrounded())
-        {
-            player.vfxRun.Stop();
-            
-        }
-
-        if (_moveInput.x != 0)
-        {
             pAudio.sfXWalk(player.sfxWalk);
+            player.vfxRun.Play();
         }
         else
         {
             pAudio.stopAudio();
+            player.vfxRun.Stop();
         }
 
     }
