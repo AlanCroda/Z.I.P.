@@ -880,14 +880,14 @@ MonoBehaviour:
   vfxRun: {fileID: 6983638544270432620}
   vfxFloat: {fileID: 9089936153231094594}
   vfxDoubleJump: {fileID: 9210097727392357360}
-  hasFloatingPowerup: 0
+  hasFloatingPowerup: 1
   _isFloating: 0
   floatTime: 1.5
   floatSpeed: -2
-  hasDoubleJumpPowerup: 0
+  hasDoubleJumpPowerup: 1
   canDoubleJump: 1
   doubleJumpForce: 17
-  hasDashPowerup: 0
+  hasDashPowerup: 1
   canDash: 0
   dashForce: 25
   dashTime: 0.1
@@ -997,7 +997,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5486973127599547375}
   screenShake: {fileID: 0}
-  timescale: 1
 --- !u!114 &1100662946692373858
 MonoBehaviour:
   m_ObjectHideFlags: 0
