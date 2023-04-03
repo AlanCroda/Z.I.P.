@@ -106,4 +106,12 @@ public class Player : MonoBehaviour
     internal float dashForce;
     [SerializeField]
     internal float dashTime;
+
+    [Header("AudioClips")]
+    [SerializeField]
+    internal AudioClip sfxWalk;
+    [SerializeField]
+    internal AudioClip sfxJump;
+    [SerializeField]
+    internal AudioClip sfxWallSlide;
 }

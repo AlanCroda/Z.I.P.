@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Player player;
     [SerializeField] PlayerAnimations playerAnims;
     [HideInInspector] public Rigidbody2D rb;
+    private PlayerAudio pAudio;
 
     bool isWallSliding = false;
     int facingDirection = -1;
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        pAudio = GetComponent<PlayerAudio>();   
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -63,13 +65,16 @@ public class PlayerMovement : MonoBehaviour
             Flip(); 
         }
 
+       
+
     }
 
     void WallSliding()
     {
         if(isWallSliding)
         {
-            if(rb.velocity.y < -player.wallSlideSpeed)
+            pAudio.sfxWallSlide(player.sfxWallSlide);
+            if (rb.velocity.y < -player.wallSlideSpeed)
             {
                 rb.velocity = new Vector2(rb.velocity.x, -player.wallSlideSpeed);
             }
@@ -89,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
             lastJumpPressed = 0;
             Vector2 force = new Vector2(player.wallJumpForce.x, player.wallJumpForce.y);
             force.x *= facingDirection;
+            
 
             if (Mathf.Sign(rb.velocity.x) != Mathf.Sign(force.x))
             {
@@ -129,12 +135,14 @@ public class PlayerMovement : MonoBehaviour
                 lastJumpPressed = 0;
                 coyoteTime = 0;
                 rb.velocity = new Vector2(rb.velocity.x, 0);
+                pAudio.sfxJump(player.sfxJump);
                 rb.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);
             }
             else if (isWallSliding && !player.collisionScript.isGrounded())
             {
                 lastJumpPressed = 0;
                 rb.velocity = Vector2.zero;
+                
                 Vector2 force = new Vector2(player.wallJumpForce.x, player.wallJumpForce.y);
                 force.x *= facingDirection;
 
@@ -181,11 +189,23 @@ public class PlayerMovement : MonoBehaviour
         if (_moveInput.x != 0 && player.collisionScript.isGrounded())
         {
             player.vfxRun.Play();
+            
         }
         else if(_moveInput.x == 0 || !player.collisionScript.isGrounded())
         {
             player.vfxRun.Stop();
+            
         }
+
+        if (_moveInput.x != 0)
+        {
+            pAudio.sfXWalk(player.sfxWalk);
+        }
+        else
+        {
+            pAudio.stopAudio();
+        }
+
     }
 
 
