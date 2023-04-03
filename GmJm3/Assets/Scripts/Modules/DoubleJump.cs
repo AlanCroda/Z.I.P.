@@ -7,7 +7,7 @@ public class DoubleJump : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private screenShake screenShake;
-    [SerializeField] private float timescale = 1;
+    //[SerializeField] private float timescale = 1;
 
     private void Awake()
     {
