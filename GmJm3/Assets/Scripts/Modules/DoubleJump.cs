@@ -25,7 +25,7 @@ public class DoubleJump : MonoBehaviour
 
     IEnumerator FreezeFrames()
     {
-        screenShake.ShakeScreen(.5f, 1.2f);
+        screenShake.ShakeScreen(.5f, .5f);
         player.vfxDoubleJump.Play();
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(0.02f);
