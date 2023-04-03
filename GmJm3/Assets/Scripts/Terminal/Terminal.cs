@@ -15,7 +15,7 @@ public class Terminal : MonoBehaviour
 
     public void Activate()
     {
-        if(doubleJumpPickup)
+        if (doubleJumpPickup)
         {
             player.hasDoubleJumpPowerup = true;
         }

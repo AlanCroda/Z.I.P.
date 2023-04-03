@@ -22,7 +22,7 @@ public class Dash : MonoBehaviour
             else
             {
                 player.playerMovement.rb.velocity = Vector2.zero;
-                player.playerMovement.rb.AddForce(Vector2.right * player.dashForce, ForceMode2D.Impulse);
+                player.playerMovement.rb.AddForce(Vector2.right * -player.playerMovement.facingDirection * player.dashForce, ForceMode2D.Impulse);
                 StartCoroutine(DashCoroutine());
             }
             player.canDash = false;

@@ -126,5 +126,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doubleJumpPickup: 1
   floatPickup: 0
-  dashPickup: 0
+  dashPickup: 1
   player: {fileID: 5486973127599547375, guid: c81f1afa89364b542955dbccde26245a, type: 3}

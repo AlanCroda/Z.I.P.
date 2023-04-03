@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     internal PlayerCollision collisionScript;
     [SerializeField]
+    internal PlayerDeath deathScript;
+    [SerializeField]
     internal DoubleJump doubleJump;
     [SerializeField]
     internal Floating floating;
@@ -106,6 +108,10 @@ public class Player : MonoBehaviour
     internal float dashForce;
     [SerializeField]
     internal float dashTime;
+
+    [Header("Data")]
+    [SerializeField]
+    internal Vector3 checkpointPosition;
 
     [Header("AudioClips")]
     [SerializeField]
