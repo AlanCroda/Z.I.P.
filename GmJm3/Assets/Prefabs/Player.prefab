@@ -858,12 +858,12 @@ MonoBehaviour:
   hasControl: 1
   jumpForce: 18
   fallMultiplier: -0.1
-  maxFallSpeed: -15
+  maxFallSpeed: -13
   jumpHangTimeThreshold: 1
   jumpHangAccelerationMultiplier: 1.1
   jumpHangMaxSpeedMultiplier: 1.3
   wallJumpForce: {x: 10, y: 15}
-  wallSlideSpeed: 2
+  wallSlideSpeed: 3
   jumpCutValue: 3
   jumpBuffer: 0.2
   coyoteBufferTime: 0.05
@@ -879,10 +879,10 @@ MonoBehaviour:
   hasFloatingPowerup: 1
   _isFloating: 0
   floatTime: 1.5
-  floatSpeed: -1
+  floatSpeed: -2
   hasDoubleJumpPowerup: 1
   canDoubleJump: 1
-  doubleJumpForce: 15
+  doubleJumpForce: 17
   hasDashPowerup: 0
   canDash: 0
   dashForce: 25
@@ -988,6 +988,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5486973127599547375}
+  screenShake: {fileID: 0}
+  timescale: 1
 --- !u!114 &1100662946692373858
 MonoBehaviour:
   m_ObjectHideFlags: 0
