@@ -5,6 +5,7 @@ public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] Player player;
 
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -40,6 +41,7 @@ public class PlayerCollision : MonoBehaviour
 
     internal bool touchingWall()
     {
+        
         if (Physics2D.BoxCast(transform.position - transform.up * player.sideBoxCastOffset, player.rightBoxSize, 0, -transform.right, player.rightDistance, player.ground))
         {
             return true;
