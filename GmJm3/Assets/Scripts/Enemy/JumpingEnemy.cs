@@ -4,24 +4,37 @@ using UnityEngine;
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class JumpingEnemy : MonoBehaviour
 {
-    public float pointA;
-    public float pointB;
-    private Rigidbody2D rb;
-    public float speed;
+    [Header("Jumping")]
+    [Tooltip("This effects Jump Height")]
+    [Range(2f,8f)]
+    [SerializeField] private float jumpHeight;
 
-    public float jumpHeight;
-    public LayerMask groundLayer;
-    public float groundCheck;
-    public Vector2 boxSize;
-    [SerializeField] private float dir;
+    [Header("Movement")]
+    [Tooltip("Speed Of Enemy")]
+    [Range(4f,10f)]
+    [SerializeField] private float speed;
+    [Tooltip("Distance from and to the enemy")]
+    [Range(3f,8f)]
     [SerializeField] private float distance;
+
+
+    #region ignore
+    //Private
+    [SerializeField] private float pointA;
+    [SerializeField] private float pointB;
     float PlayerPos;
-    public CapsuleCollider2D capsuleCollider;
+    private float dir;
+    private float coolDown = 0.2f;
     private float jumpCoolDown;
-    [SerializeField] private float coolDown;
+    private float groundCheck = 2f;
 
 
+    //Components
+    private CapsuleCollider2D collisionCollider;
+    private Rigidbody2D rb;
+    #endregion
 
+    #region Initiation
 
     private void Start()
     {
@@ -31,30 +44,38 @@ public class JumpingEnemy : MonoBehaviour
     private void Init()
     {
         dir = speed;
+        collisionCollider = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         jumpCoolDown = coolDown;
         rb.velocity = new Vector2(dir, rb.velocity.y);
-        pointA = distance;
-        pointB = -distance;
+        PlayerPos = transform.position.x;
+        pointA = PlayerPos + distance;
+        pointB = PlayerPos - distance;
 
     }
-    private void Update()
+    #endregion
+
+    #region Update
+    protected virtual void Update()
     {
         OnMove();
         JumpEnemy();
         jumpCoolDown -= Time.deltaTime;
 
     }
-    
+
+    #endregion
+
+    #region Jump
 
     void JumpEnemy()
-    {   
+    {
         if(jumpCoolDown <= 0)
         {
             if (isGrounded())
             {
+                print("Jumped");
                 rb.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
-
             }
             jumpCoolDown = coolDown;
         }
@@ -63,9 +84,13 @@ public class JumpingEnemy : MonoBehaviour
 
     private bool isGrounded()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, groundLayer,0);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, groundCheck, LayerMask.GetMask("Ground"),0);
         return hit;
     }
+
+    #endregion
+
+    #region Movement
     private void OnMove()
     {
         rb.velocity = new Vector2(dir, rb.velocity.y);
@@ -74,13 +99,10 @@ public class JumpingEnemy : MonoBehaviour
         {       
             dir = -speed ;           
         }
-        
         if(PlayerPos < pointB)
         {
             dir = speed;           
         }
-        
     }
-
-
+    #endregion
 }
