@@ -8,6 +8,10 @@ public class PlayerAnimations : MonoBehaviour
     [SerializeField] private PlayerMovement _movement;
     [SerializeField] private PlayerCollision collision;
     [SerializeField] private Player playerVariables;
+    [SerializeField] private PlayerStateMachine playerStateMachine;
+
+    [SerializeField] InputSO playerMovement;
+
     private float _lockedTill;
 
     private void Start()
@@ -31,11 +35,11 @@ public class PlayerAnimations : MonoBehaviour
         if (Time.time < _lockedTill) return _currentState;
         // Priorities
 
-        if (_movement._jumpPressed) return Jump;
-        if (playerVariables._isFloating && !collision.isGrounded()) return Floating; 
-        if (_movement._moveInput.x ==0) return Idle;
-        if (collision.isGrounded()) return _movement._moveInput.x == 0 ? Idle : Walk; 
-        return _movement.rb.velocity.y > 0 ? Jump : Walk;
+        if (playerMovement.bools[0]) return Jump;
+        if (playerStateMachine.isFloating && !collision.isGrounded()) return Floating; 
+        if (playerMovement.vectors[0].x ==0) return Idle;
+        if (collision.isGrounded()) return playerMovement.vectors[0].x == 0 ? Idle : Walk; 
+        return playerMovement.vectors[0].y > 0 ? Jump : Walk;
 
         //int LockState(int s, float t)
         //{

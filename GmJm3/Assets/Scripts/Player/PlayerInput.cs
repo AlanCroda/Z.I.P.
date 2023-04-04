@@ -6,6 +6,7 @@ public class PlayerInput : MonoBehaviour
 {
     [SerializeField] Player player;
     internal _playerActions _playerActions;
+    [SerializeField] InputSO playerMovement;
 
     internal Vector2 _moveInput;
     internal float _jumpPressed;
@@ -31,9 +32,9 @@ public class PlayerInput : MonoBehaviour
 
     private void Update()
     {
-        _moveInput.x = _playerActions.Player.Movement.ReadValue<Vector2>().x;
-        _moveInput.y = _playerActions.Player.Movement.ReadValue<Vector2>().y;
-        _jumpPressed = _playerActions.Player.Jump.ReadValue<float>();
-        _floatPressed = _playerActions.Player.Float.ReadValue<float>();
+        playerMovement.vectors[0].x = _playerActions.Player.Movement.ReadValue<Vector2>().x;
+        playerMovement.vectors[0].y = _playerActions.Player.Movement.ReadValue<Vector2>().y;
+        playerMovement.bools[0] = (_playerActions.Player.Jump.ReadValue<float>() > 0);
+        playerMovement.floats[0] = _playerActions.Player.Float.ReadValue<float>();
     }
 }

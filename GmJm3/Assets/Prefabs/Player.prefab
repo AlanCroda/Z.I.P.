@@ -907,11 +907,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26602a0a8bde84c4dbf4a09edd80e22b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSO: {fileID: 11400000, guid: 0eb79397ed9547d43a8e1debd7b08f7d, type: 2}
+  playerStateMachine: {fileID: 11400000, guid: a9be650a2af445240abb408f67115f20, type: 2}
+  playerMovement: {fileID: 11400000, guid: ee3dc77affdb1b043a784e51fcbe889d, type: 2}
   player: {fileID: 5486973127599547375}
   playerAnims: {fileID: 3853396336209925631}
   rb: {fileID: 0}
   _moveInput: {x: 0, y: 0}
-  _jumpPressed: 0
   lastJumpPressed: 0
 --- !u!114 &5486973127599547373
 MonoBehaviour:
@@ -926,6 +928,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5486973127599547375}
+  playerSO: {fileID: 11400000, guid: 0eb79397ed9547d43a8e1debd7b08f7d, type: 2}
+  playerStateMachine: {fileID: 11400000, guid: a9be650a2af445240abb408f67115f20, type: 2}
 --- !u!114 &5486973127599547362
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,6 +943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 5486973127599547375}
+  playerMovement: {fileID: 0}
 --- !u!114 &3853396336209925631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -955,6 +960,8 @@ MonoBehaviour:
   _movement: {fileID: 5486973127599547372}
   collision: {fileID: 5486973127599547373}
   playerVariables: {fileID: 5486973127599547375}
+  playerStateMachine: {fileID: 11400000, guid: a9be650a2af445240abb408f67115f20, type: 2}
+  playerMovement: {fileID: 11400000, guid: ee3dc77affdb1b043a784e51fcbe889d, type: 2}
 --- !u!114 &5486973127599547360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -969,6 +976,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _movement: {fileID: 0}
+  playerSO: {fileID: 11400000, guid: 0eb79397ed9547d43a8e1debd7b08f7d, type: 2}
+  playerMovement: {fileID: 11400000, guid: ee3dc77affdb1b043a784e51fcbe889d, type: 2}
   currentFloatTime: 0
 --- !u!114 &5486973127599547363
 MonoBehaviour:
@@ -997,6 +1006,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 5486973127599547375}
   screenShake: {fileID: 0}
+  playerSO: {fileID: 11400000, guid: 0eb79397ed9547d43a8e1debd7b08f7d, type: 2}
+  playerMovement: {fileID: 11400000, guid: ee3dc77affdb1b043a784e51fcbe889d, type: 2}
 --- !u!114 &1100662946692373858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,7 +1020,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a79d3fffc7f8c7499b4872cba0df255, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 5486973127599547375}
   terminal: {fileID: 3599720006435092682, guid: b79c055b759bf7e4795b777d04ec783b, type: 3}
 --- !u!61 &4616408950334352948
 BoxCollider2D:

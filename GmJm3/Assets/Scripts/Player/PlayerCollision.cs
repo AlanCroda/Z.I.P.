@@ -4,6 +4,8 @@ using UnityEngine;
 public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] Player player;
+    [SerializeField] PlayerSO playerSO;
+    [SerializeField] PlayerStateMachine playerStateMachine;
 
 
     private void OnDrawGizmos()
@@ -18,48 +20,42 @@ public class PlayerCollision : MonoBehaviour
         Gizmos.DrawCube(transform.position + transform.right * player.leftDistance - transform.up * player.sideBoxCastOffset, player.rightBoxSize);
     }
 
-    private void Update()
-    {
-        if(isGrounded())
-        {
-            ResetPowerups();
-        }
-    }
-
     internal bool isGrounded()
     {
         if(Physics2D.BoxCast(transform.position,player.bottomBoxSize,0,-transform.up,player.bottomDistance,player.ground))
         {
+            playerStateMachine.isGrounded = true;
+            ResetPowerups();
             return true;
         }
-
         else
         {
+            playerStateMachine.isGrounded = false;
             return false;
         }
     }
 
     internal bool touchingWall()
     {
-        
         if (Physics2D.BoxCast(transform.position - transform.up * player.sideBoxCastOffset, player.rightBoxSize, 0, -transform.right, player.rightDistance, player.ground))
         {
+            playerStateMachine.touchingWall = true;
             return true;
         }
         if (Physics2D.BoxCast(transform.position - transform.up * player.sideBoxCastOffset, player.rightBoxSize, 0, transform.right, player.leftDistance, player.ground))
         {
-            return true;
+            playerStateMachine.touchingWall = false;
+            return false;
         }
-        else
-        {
+        else { playerStateMachine.touchingWall = false;
             return false;
         }
     }
 
     public void ResetPowerups()
     {
-        player.canDoubleJump = true;
-        player.floating.currentFloatTime = player.floatTime;
-        player.canDash = true;
+        playerSO.CanDoubleJump = true;
+        player.floating.currentFloatTime = playerSO.floatTime;
+        playerSO.canDash = true;
     }
 }

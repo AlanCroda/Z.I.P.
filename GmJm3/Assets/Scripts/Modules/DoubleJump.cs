@@ -1,12 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DoubleJump : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private screenShake screenShake;
+    [SerializeField] private PlayerSO playerSO;
+    [SerializeField] private InputSO playerMovement;
     //[SerializeField] private float timescale = 1;
 
     private void Awake()
@@ -16,7 +16,7 @@ public class DoubleJump : MonoBehaviour
 
     public void doubleJump()
     {
-        if(!player.collisionScript.isGrounded() && !player.collisionScript.touchingWall() && player.canDoubleJump && player.hasDoubleJumpPowerup)
+        if(!player.collisionScript.isGrounded() && !player.collisionScript.touchingWall() && playerSO.canDoubleJump && playerSO.hasDoubleJumpPowerup)
         {
 
             StartCoroutine(FreezeFrames());
@@ -31,9 +31,9 @@ public class DoubleJump : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.02f);
         Time.timeScale = 1;
         player.playerMovement.lastJumpPressed = 0;
-        player.canDoubleJump = false;
-        player.playerMovement.rb.velocity = new Vector2(player.playerMovement.rb.velocity.x, 0);
-        player.playerMovement.rb.AddForce(Vector2.up * player.doubleJumpForce, ForceMode2D.Impulse);
+        playerSO.canDoubleJump = false;
+        player.playerMovement.rb.velocity = new Vector2(playerMovement.vectors[1].x, 0);
+        player.playerMovement.rb.AddForce(Vector2.up * playerSO.doubleJumpForce, ForceMode2D.Impulse);
     }
 
 }

@@ -4,6 +4,10 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Player))]
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private PlayerSO playerSO;
+    [SerializeField] private PlayerStateMachine playerStateMachine;
+    [SerializeField] private InputSO playerMovement;
+
     [SerializeField] Player player;
     [SerializeField] PlayerAnimations playerAnims;
     [HideInInspector] public Rigidbody2D rb;
@@ -14,8 +18,6 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector]
     public Vector2 _moveInput;
-    [HideInInspector]
-    public bool _jumpPressed = false;
     [HideInInspector]
     public float lastJumpPressed;
     float coyoteTime;
@@ -31,36 +33,36 @@ public class PlayerMovement : MonoBehaviour
     void move()
     {
         //calculate the direction we want to move in and our target velocity
-        float TargetSpeed = _moveInput.x * player.walkSpeed;
+        float TargetSpeed = playerMovement.vectors[0].x * playerSO.WalkSpeed;
         TargetSpeed = Mathf.Lerp(rb.velocity.x, TargetSpeed, 1);
         //calculated the difference between our current speed and our target speed
         float SpeedDif = TargetSpeed - rb.velocity.x;
         //change acceleration depending on situation
-        float accelRate = (Mathf.Abs(TargetSpeed) > 0.01f) ? player.acceleration : player.decceleration;
+        float accelRate = (Mathf.Abs(TargetSpeed) > 0.01f) ? playerSO.WalkSpeed : playerSO.Deceleration;
 
-        if (!player.collisionScript.isGrounded() && rb.velocity.y < player.jumpHangTimeThreshold)
+        if (!playerStateMachine.isGrounded && rb.velocity.y < playerSO.JumpHangTimeThreshhold)
         {
-            SpeedDif *= player.jumpHangMaxSpeedMultiplier;
-            accelRate *= player.jumpHangAccelerationMultiplier;
+            SpeedDif *= playerSO.JumpHangMaxSpeedMultiplier;
+            accelRate *= playerSO.JumpHangAccelerationMultiplier;
         }
 
         float movement = SpeedDif * accelRate;
 
         rb.AddForce(movement * Vector2.right, ForceMode2D.Force);
 
-        if (Mathf.Approximately(_moveInput.x, 0))
+        if (Mathf.Approximately(playerMovement.vectors[0].x, 0))
         {
-            float amount = Mathf.Min(Mathf.Abs(rb.velocity.x), Mathf.Abs(player.frictionAmount));
+            float amount = Mathf.Min(Mathf.Abs(rb.velocity.x), Mathf.Abs(playerSO.Friction));
             amount *= Mathf.Sign(rb.velocity.x);
             rb.AddForce(Vector2.right * -amount, ForceMode2D.Impulse);
         }
 
 
-        if(player.facingRight && _moveInput.x < 0)
+        if(playerSO.FacingRight && playerMovement.vectors[0].x < 0)
         {
             Flip();
         }
-        else if(!player.facingRight && _moveInput.x > 0) 
+        else if(!playerSO.FacingRight && playerMovement.vectors[0].x > 0) 
         { 
             Flip(); 
         }
@@ -71,12 +73,12 @@ public class PlayerMovement : MonoBehaviour
 
     void WallSliding()
     {
-        if(isWallSliding)
+        if(playerStateMachine.isWallSliding)
         {
             pAudio.sfxWallSlide(player.sfxWallSlide);
-            if (rb.velocity.y < -player.wallSlideSpeed)
+            if (rb.velocity.y < -playerSO.WallSlideSpeed)
             {
-                rb.velocity = new Vector2(rb.velocity.x, -player.wallSlideSpeed);
+                rb.velocity = new Vector2(rb.velocity.x, -playerSO.WallSlideSpeed);
             }
         }
     }
@@ -87,12 +89,12 @@ public class PlayerMovement : MonoBehaviour
         {
             lastJumpPressed = 0;
             rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);
+            rb.AddForce(Vector2.up * playerSO.JumpForce, ForceMode2D.Impulse);
         }
-        if(isWallSliding && !player.collisionScript.isGrounded() && lastJumpPressed > 0)
+        if(playerStateMachine.isWallSliding && !player.collisionScript.isGrounded() && lastJumpPressed > 0)
         {
             lastJumpPressed = 0;
-            Vector2 force = new Vector2(player.wallJumpForce.x, player.wallJumpForce.y);
+            Vector2 force = new Vector2(playerSO.WallJumpForce.x, playerSO.WallJumpForce.y);
             force.x *= facingDirection;
             
 
@@ -114,14 +116,14 @@ public class PlayerMovement : MonoBehaviour
             player.doubleJump.doubleJump();
         }
 
-        if(!_jumpPressed && rb.velocity.y > 0)
+        if(!playerMovement.bools[0] && rb.velocity.y > 0)
         {
-            rb.AddForce(-Vector2.up * player.jumpCutValue, ForceMode2D.Impulse);
+            rb.AddForce(-Vector2.up * playerSO.JumpCutValue, ForceMode2D.Impulse);
         }
 
         if(rb.velocity.y < 0)
         {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, player.maxFallSpeed));
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, playerSO.MaxFallSpeed));
         }
     }
 
@@ -129,21 +131,21 @@ public class PlayerMovement : MonoBehaviour
     {
         if(context.started)
         {
-            lastJumpPressed = player.jumpBuffer;
+            lastJumpPressed = playerSO.JumpBuffer;
             if (coyoteTime > 0)
             {
                 lastJumpPressed = 0;
                 coyoteTime = 0;
                 rb.velocity = new Vector2(rb.velocity.x, 0);
                 pAudio.sfxJump(player.sfxJump);
-                rb.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * playerSO.JumpForce, ForceMode2D.Impulse);
             }
-            else if (isWallSliding && !player.collisionScript.isGrounded())
+            else if (playerStateMachine.isWallSliding && !player.collisionScript.isGrounded())
             {
                 lastJumpPressed = 0;
                 rb.velocity = Vector2.zero;
                 
-                Vector2 force = new Vector2(player.wallJumpForce.x, player.wallJumpForce.y);
+                Vector2 force = new Vector2(playerSO.WallJumpForce.x, playerSO.WallJumpForce.y);
                 force.x *= facingDirection;
 
                 if (Mathf.Sign(rb.velocity.x) != Mathf.Sign(force.x))
@@ -163,7 +165,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(player.hasControl)
+        if(playerSO.HasControl)
         {
             move();
             jumpSetup();
@@ -172,21 +174,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        _jumpPressed = (player.playerInput._jumpPressed > 0);
-
         lastJumpPressed -= Time.deltaTime;
         coyoteTime -= Time.deltaTime;
         if(player.collisionScript.isGrounded())
         {
-            coyoteTime = player.coyoteBufferTime;
+            coyoteTime = playerSO.CoyoteBufferTime;
         }
 
-        _moveInput = player.playerInput._moveInput;
-
-        isWallSliding = player.collisionScript.touchingWall();
+        playerStateMachine.isWallSliding = player.collisionScript.touchingWall();
         WallSliding();
 
-        if (_moveInput.x != 0 && player.collisionScript.isGrounded())
+        if (playerMovement.vectors[0].x != 0 && player.collisionScript.isGrounded())
         {
             pAudio.sfXWalk(player.sfxWalk);
             player.vfxRun.Play();
@@ -205,7 +203,7 @@ public class PlayerMovement : MonoBehaviour
         if(!isWallSliding)
         {
             facingDirection *= -1;
-            player.facingRight = !player.facingRight;
+            playerSO.FacingRight = !playerSO.FacingRight;
             transform.Rotate(0, 180, 0);
         }
     }

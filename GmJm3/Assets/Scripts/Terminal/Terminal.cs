@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Terminal : MonoBehaviour
 {
+    [SerializeField] PlayerSO playerSO;
+
     [SerializeField] bool doubleJumpPickup;
     [SerializeField] bool floatPickup;
     [SerializeField] bool dashPickup;
-    private static Player player;
     private static Terminal terminal;
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         terminal = GetComponent<Terminal>();
     }
 
@@ -20,15 +20,15 @@ public class Terminal : MonoBehaviour
     {
         if(terminal.doubleJumpPickup)
         {
-            player.hasDoubleJumpPowerup = true;
+            playerSO.hasDoubleJumpPowerup = true;
         }
         if(terminal.floatPickup)
         {
-            player.hasFloatingPowerup = true;
+            playerSO.hasFloatingPowerup = true;
         }
         if(terminal.dashPickup)
         {
-            player.hasDashPowerup = true;
+            playerSO.hasDashPowerup = true;
         }
     }
 }

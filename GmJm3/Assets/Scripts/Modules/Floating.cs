@@ -7,34 +7,37 @@ public class Floating : MonoBehaviour
 {
     [SerializeField] Player _player;
     [SerializeField] PlayerMovement _movement;
+    [SerializeField] PlayerSO playerSO;
+
+    [SerializeField] InputSO playerMovement;
 
     private float _noFloatSpeed;
-    [HideInInspector] public float currentFloatTime;
+    public float currentFloatTime;
 
     private void Awake()
     {
         _player = GetComponent<Player>();
         _movement = GetComponent<PlayerMovement>();
-        _noFloatSpeed = _player.maxFallSpeed;
-        currentFloatTime = _player.floatTime;
+        _noFloatSpeed = playerSO.MaxFallSpeed;
+        currentFloatTime = playerSO.floatTime;
     }
 
     private void Update()
     {
-        if (_player.hasFloatingPowerup && _player.hasControl)
+        if (playerSO.HasFloatingPowerup && playerSO.HasControl)
         {
             checkFloat();
         }
-        if(!_player.hasControl)
+        if(!playerSO.HasControl)
         {
-            _player._isFloating = false;
-            _player.maxFallSpeed = _noFloatSpeed;
+            playerSO.IsFloating = false;
+            playerSO.MaxFallSpeed = _noFloatSpeed;
         }
 
-        if (_player._isFloating)
+        if (playerSO.IsFloating)
         {
             _player.vfxFloat.Play();
-            _movement._jumpPressed = false;
+            playerMovement.bools[0] = false;
         }
         else
         {
@@ -44,23 +47,23 @@ public class Floating : MonoBehaviour
 
     public void checkFloat()
     {
-        if (_player.playerInput._floatPressed > 0 && currentFloatTime > 0)
+        if (playerMovement.floats[0] > 0 && currentFloatTime > 0)
         {
-            _player._isFloating = true;
+            playerSO.IsFloating = true;
         }
         else
         {
-            _player._isFloating = false;
+            playerSO.IsFloating = false;
         }
 
-        if (_player._isFloating && !_player.collisionScript.isGrounded())
+        if (playerSO.IsFloating && !_player.collisionScript.isGrounded())
         {
             currentFloatTime -= Time.deltaTime;
-            _player.maxFallSpeed = _player.floatSpeed;
+            playerSO.MaxFallSpeed = playerSO.floatSpeed;
         }
         else
         {
-            _player.maxFallSpeed = _noFloatSpeed;
+            playerSO.MaxFallSpeed = _noFloatSpeed;
         }
     }
 }

@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae7ac0fb5d89dcb43a5171609b2b03a3, type: 3}
+  m_Name: Player SO
+  m_EditorClassIdentifier: 
+  WalkSpeed: 12
+  Acceleration: 3
+  Deceleration: 5
+  Friction: -0.5
+  FacingRight: 0
+  HasControl: 1
+  IsFloating: 0
+  CanDoubleJump: 1
+  canDash: 1
+  isWallSliding: 0
+  HasFloatingPowerup: 1
+  HasDoubleJumpPowerUp: 0
+  HasDashPowerup: 0
+  JumpForce: 18
+  FallMultiplier: -0.1
+  MaxFallSpeed: -13
+  JumpHangTimeThreshhold: 1
+  JumpHangAccelerationMultiplier: 1.1
+  JumpHangMaxSpeedMultiplier: 1.3
+  WallJumpForce: {x: 10, y: 15}
+  WallSlideSpeed: 3
+  JumpCutValue: 3
+  JumpBuffer: 0.2
+  CoyoteBufferTime: 0.05
+  hasFloatingPowerup: 1
+  _isFloating: 0
+  floatTime: 1.5
+  floatSpeed: -2
+  hasDoubleJumpPowerup: 0
+  canDoubleJump: 1
+  doubleJumpForce: 17
+  hasDashPowerup: 0
+  dashForce: 25
+  dashTime: 0
