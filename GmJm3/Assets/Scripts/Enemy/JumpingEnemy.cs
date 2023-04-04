@@ -20,13 +20,13 @@ public class JumpingEnemy : MonoBehaviour
 
     #region ignore
     //Private
-    [SerializeField] private float pointA;
-    [SerializeField] private float pointB;
+    private float pointA;
+    private float pointB;
     float PlayerPos;
     private float dir;
     private float coolDown = 0.2f;
     private float jumpCoolDown;
-    private float groundCheck = 2f;
+    private float groundCheck = 1.5f;
 
 
     //Components
@@ -64,6 +64,8 @@ public class JumpingEnemy : MonoBehaviour
 
     }
 
+    
+
     #endregion
 
     #region Jump
@@ -74,7 +76,6 @@ public class JumpingEnemy : MonoBehaviour
         {
             if (isGrounded())
             {
-                print("Jumped");
                 rb.AddForce(new Vector2(0, jumpHeight), ForceMode2D.Impulse);
             }
             jumpCoolDown = coolDown;
