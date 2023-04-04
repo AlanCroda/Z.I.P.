@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class PlayerInteractions : MonoBehaviour
 {
-    [SerializeField]
-    Player player;
-    [SerializeField]
-    Terminal terminal;
+    [SerializeField] Terminal terminal;
     internal bool canInteract = false;
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.tag == "Terminal")
         {

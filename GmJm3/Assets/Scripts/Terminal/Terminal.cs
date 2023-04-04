@@ -4,26 +4,29 @@ using UnityEngine;
 
 public class Terminal : MonoBehaviour
 {
-    [SerializeField]
-    bool doubleJumpPickup;
-    [SerializeField]
-    bool floatPickup;
-    [SerializeField]
-    bool dashPickup;
-    [SerializeField]
-    Player player;
+    [SerializeField] bool doubleJumpPickup;
+    [SerializeField] bool floatPickup;
+    [SerializeField] bool dashPickup;
+    private static Player player;
+    private static Terminal terminal;
+
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        terminal = GetComponent<Terminal>();
+    }
 
     public void Activate()
     {
-        if(doubleJumpPickup)
+        if(terminal.doubleJumpPickup)
         {
             player.hasDoubleJumpPowerup = true;
         }
-        if(floatPickup)
+        if(terminal.floatPickup)
         {
             player.hasFloatingPowerup = true;
         }
-        if(dashPickup)
+        if(terminal.dashPickup)
         {
             player.hasDashPowerup = true;
         }

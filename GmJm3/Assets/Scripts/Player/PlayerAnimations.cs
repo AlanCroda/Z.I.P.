@@ -37,11 +37,11 @@ public class PlayerAnimations : MonoBehaviour
         if (collision.isGrounded()) return _movement._moveInput.x == 0 ? Idle : Walk; 
         return _movement.rb.velocity.y > 0 ? Jump : Walk;
 
-        int LockState(int s, float t)
-        {
-            _lockedTill = Time.time + t;
-            return s;
-        }
+        //int LockState(int s, float t)
+        //{
+        //    _lockedTill = Time.time + t;
+        //    return s;
+        //}
     }
 
 

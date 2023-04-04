@@ -1,16 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 
 public class TrapLaser : MonoBehaviour
 {
     public LineRenderer lineRenderer;
     public Transform point1, point2;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()

@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private PlayerAudio pAudio;
 
     bool isWallSliding = false;
-    int facingDirection = -1;
+    internal int facingDirection = -1;
 
     [HideInInspector]
     public Vector2 _moveInput;
