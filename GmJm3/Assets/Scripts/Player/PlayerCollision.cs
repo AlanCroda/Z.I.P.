@@ -5,6 +5,7 @@ public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] Player player;
 
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -15,6 +16,14 @@ public class PlayerCollision : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawCube(transform.position + transform.right * player.leftDistance - transform.up * player.sideBoxCastOffset, player.rightBoxSize);
+    }
+
+    private void Update()
+    {
+        if(isGrounded())
+        {
+            ResetPowerups();
+        }
     }
 
     internal bool isGrounded()
@@ -32,6 +41,7 @@ public class PlayerCollision : MonoBehaviour
 
     internal bool touchingWall()
     {
+        
         if (Physics2D.BoxCast(transform.position - transform.up * player.sideBoxCastOffset, player.rightBoxSize, 0, -transform.right, player.rightDistance, player.ground))
         {
             return true;
@@ -44,5 +54,12 @@ public class PlayerCollision : MonoBehaviour
         {
             return false;
         }
+    }
+
+    public void ResetPowerups()
+    {
+        player.canDoubleJump = true;
+        player.floating.currentFloatTime = player.floatTime;
+        player.canDash = true;
     }
 }

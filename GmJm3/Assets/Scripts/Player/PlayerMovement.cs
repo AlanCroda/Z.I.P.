@@ -6,21 +6,25 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] Player player;
     [SerializeField] PlayerAnimations playerAnims;
-    public Rigidbody2D rb;
-
+    [HideInInspector] public Rigidbody2D rb;
+    private PlayerAudio pAudio;
 
     bool isWallSliding = false;
-    int facingDirection = -1;
+    internal int facingDirection = -1;
 
+    [HideInInspector]
     public Vector2 _moveInput;
+    [HideInInspector]
     public bool _jumpPressed = false;
-    float lastJumpPressed;
+    [HideInInspector]
+    public float lastJumpPressed;
     float coyoteTime;
 
 
 
     private void Start()
     {
+        pAudio = GetComponent<PlayerAudio>();   
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -61,13 +65,16 @@ public class PlayerMovement : MonoBehaviour
             Flip(); 
         }
 
+       
+
     }
 
     void WallSliding()
     {
         if(isWallSliding)
         {
-            if(rb.velocity.y < -player.wallSlideSpeed)
+            pAudio.sfxWallSlide(player.sfxWallSlide);
+            if (rb.velocity.y < -player.wallSlideSpeed)
             {
                 rb.velocity = new Vector2(rb.velocity.x, -player.wallSlideSpeed);
             }
@@ -82,12 +89,12 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x, 0);
             rb.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);
         }
-
         if(isWallSliding && !player.collisionScript.isGrounded() && lastJumpPressed > 0)
         {
             lastJumpPressed = 0;
             Vector2 force = new Vector2(player.wallJumpForce.x, player.wallJumpForce.y);
             force.x *= facingDirection;
+            
 
             if (Mathf.Sign(rb.velocity.x) != Mathf.Sign(force.x))
             {
@@ -102,9 +109,16 @@ public class PlayerMovement : MonoBehaviour
             rb.AddForce(force, ForceMode2D.Impulse);
         }
 
-        if(!_jumpPressed && rb.velocity.y > 0) {
+        if(lastJumpPressed > 0)
+        {
+            player.doubleJump.doubleJump();
+        }
+
+        if(!_jumpPressed && rb.velocity.y > 0)
+        {
             rb.AddForce(-Vector2.up * player.jumpCutValue, ForceMode2D.Impulse);
         }
+
         if(rb.velocity.y < 0)
         {
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Max(rb.velocity.y, player.maxFallSpeed));
@@ -121,12 +135,14 @@ public class PlayerMovement : MonoBehaviour
                 lastJumpPressed = 0;
                 coyoteTime = 0;
                 rb.velocity = new Vector2(rb.velocity.x, 0);
+                pAudio.sfxJump(player.sfxJump);
                 rb.AddForce(Vector2.up * player.jumpForce, ForceMode2D.Impulse);
             }
             else if (isWallSliding && !player.collisionScript.isGrounded())
             {
                 lastJumpPressed = 0;
                 rb.velocity = Vector2.zero;
+                
                 Vector2 force = new Vector2(player.wallJumpForce.x, player.wallJumpForce.y);
                 force.x *= facingDirection;
 
@@ -147,8 +163,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        move();
-        jumpSetup();
+        if(player.hasControl)
+        {
+            move();
+            jumpSetup();
+        }
     }
 
     private void Update()
@@ -170,11 +189,23 @@ public class PlayerMovement : MonoBehaviour
         if (_moveInput.x != 0 && player.collisionScript.isGrounded())
         {
             player.vfxRun.Play();
+            
         }
         else if(_moveInput.x == 0 || !player.collisionScript.isGrounded())
         {
             player.vfxRun.Stop();
+            
         }
+
+        if (_moveInput.x != 0)
+        {
+            pAudio.sfXWalk(player.sfxWalk);
+        }
+        else
+        {
+            pAudio.stopAudio();
+        }
+
     }
 
 

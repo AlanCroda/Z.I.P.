@@ -12,6 +12,14 @@ public class Player : MonoBehaviour
     internal PlayerMovement playerMovement;
     [SerializeField]
     internal PlayerCollision collisionScript;
+    [SerializeField]
+    internal PlayerDeath deathScript;
+    [SerializeField]
+    internal DoubleJump doubleJump;
+    [SerializeField]
+    internal Floating floating;
+    [SerializeField]
+    internal Dash dash;
 
     [Header("Layers")]
     [SerializeField]
@@ -28,6 +36,8 @@ public class Player : MonoBehaviour
     internal float frictionAmount;
     [SerializeField]
     internal bool facingRight;
+    [SerializeField]
+    internal bool hasControl;
 
     [Header("Jumping")]
     [SerializeField]
@@ -44,9 +54,6 @@ public class Player : MonoBehaviour
     internal float jumpHangMaxSpeedMultiplier;
     [SerializeField]
     internal Vector2 wallJumpForce;
-    [SerializeField]
-    internal int jumpsLeft;
-    internal int amountOfJumps;
     [SerializeField]
     internal float wallSlideSpeed;
     [SerializeField]
@@ -73,7 +80,44 @@ public class Player : MonoBehaviour
     [Header("Particle Effects")]
     [SerializeField]
     internal ParticleSystem vfxRun;
+    [SerializeField]
+    internal ParticleSystem vfxFloat;
+    [SerializeField]
+    internal ParticleSystem vfxDoubleJump;
 
     [Header("Powerups")]
-    [SerializeField] internal bool hasFloatingPowerup;
+    [SerializeField]
+    internal bool hasFloatingPowerup;
+    [SerializeField]
+    internal bool _isFloating;
+    [SerializeField]
+    internal float floatTime;
+    [SerializeField]
+    internal float floatSpeed;
+    [SerializeField]
+    internal bool hasDoubleJumpPowerup;
+    [SerializeField]
+    internal bool canDoubleJump;
+    [SerializeField]
+    internal float doubleJumpForce;
+    [SerializeField]
+    internal bool hasDashPowerup;
+    [SerializeField]
+    internal bool canDash;
+    [SerializeField]
+    internal float dashForce;
+    [SerializeField]
+    internal float dashTime;
+
+    [Header("Data")]
+    [SerializeField]
+    internal Vector3 checkpointPosition;
+
+    [Header("AudioClips")]
+    [SerializeField]
+    internal AudioClip sfxWalk;
+    [SerializeField]
+    internal AudioClip sfxJump;
+    [SerializeField]
+    internal AudioClip sfxWallSlide;
 }
